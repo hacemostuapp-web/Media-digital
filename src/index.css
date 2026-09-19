@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --color-primary: #701738;
+  --color-primary-container: #8e2f4f;
+  --color-on-primary: #ffffff;
+  --color-primary-fixed: #ffd9e0;
+  --color-primary-fixed-dim: #ffb1c4;
+  --color-secondary: #95435c;
+  --color-secondary-container: #fd98b2;
+  --color-secondary-fixed: #ffd9e0;
+  --color-on-secondary-fixed: #3f0019;
+  --color-surface: #fcf8f9;
+  --color-surface-dim: #ddd9da;
+  --color-surface-bright: #fcf8f9;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f6f3f4;
+  --color-surface-container: #f1edee;
+  --color-surface-container-high: #ebe7e8;
+  --color-surface-container-highest: #e5e1e2;
+  --color-on-surface: #1c1b1c;
+  --color-on-surface-variant: #554246;
+  --color-outline: #877276;
+  --color-outline-variant: #dac0c5;
+}
+
+/* Custom scrollbar hiding and safe areas */
+.no-scrollbar::-webkit-scrollbar,
+::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.pb-safe {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 12px);
+}
+.pt-safe {
+  padding-top: max(env(safe-area-inset-top, 0px), 0px);
+}

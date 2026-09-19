@@ -1,0 +1,6 @@
+{
+  "name": "StudioDrop",
+  "description": "AI Product Photo Studio for Top Resellers with background removal, lighting refinement, and marketplace export optimization.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
