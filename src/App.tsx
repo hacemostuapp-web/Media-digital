@@ -65,7 +65,7 @@ export default function App() {
   const handleUpgradeSuccess = () => {
     setUser((prev) => ({
       ...prev,
-      tier: 'StudioDrop Unlimited Plan',
+      tier: 'Plan Ilimitado StudioDrop',
       totalCredits: 9999,
     }));
   };

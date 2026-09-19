@@ -22,27 +22,27 @@ export const ExportView: React.FC<ExportViewProps> = ({
   const presets: PresetOption[] = [
     {
       title: '1200 × 1600 px',
-      desc: 'Poshmark & Shopify Web (Recommended)',
+      desc: 'Tiendas online y Mercado Libre (Recomendado)',
       size: '1.4 MB',
-      aspect: 'Optimized (3:4)',
+      aspect: 'Optimizado (3:4)',
     },
     {
       title: '1080 × 1440 px',
-      desc: 'Instagram Stories & Depop (3:4)',
+      desc: 'Historias de Instagram y redes (3:4)',
       size: '1.1 MB',
-      aspect: 'Stories (3:4)',
+      aspect: 'Historias (3:4)',
     },
     {
       title: '1000 × 1333 px',
-      desc: 'Pinterest & Mercari Feed',
+      desc: 'Feed de publicaciones y catálogos',
       size: '890 KB',
       aspect: 'Feed (3:4)',
     },
     {
       title: 'Original 3024 × 4032 px',
-      desc: 'Full Sensor Master Resolution',
+      desc: 'Resolución máxima del sensor',
       size: '4.6 MB',
-      aspect: 'Master (3:4)',
+      aspect: 'Original máster (3:4)',
     },
   ];
 
@@ -55,9 +55,9 @@ export const ExportView: React.FC<ExportViewProps> = ({
   const [queueModalOpen, setQueueModalOpen] = useState(false);
 
   const getQualityText = () => {
-    if (quality === 100) return '100% Ultra HD (Lossless)';
-    if (quality >= 90) return `${quality}% Studio High`;
-    return `${quality}% Web Balanced`;
+    if (quality === 100) return '100% Ultra HD (Sin pérdida)';
+    if (quality >= 90) return `${quality}% Estudio Alta`;
+    return `${quality}% Balanceada Web`;
   };
 
   const handleDownload = () => {
@@ -68,7 +68,7 @@ export const ExportView: React.FC<ExportViewProps> = ({
       const downloadUrl = photo.isolatedImageUrl || photo.thumbnailUrl;
       const link = document.createElement('a');
       link.href = downloadUrl;
-      link.download = `${photo.filename.replace(/\.[^/.]+$/, '')}_studio_export.${fileFormat}`;
+      link.download = `${photo.filename.replace(/\.[^/.]+$/, '')}_estudio_export.${fileFormat}`;
       link.target = '_blank';
       document.body.appendChild(link);
       link.click();
@@ -95,7 +95,7 @@ export const ExportView: React.FC<ExportViewProps> = ({
       navigator
         .share({
           title: photo.filename,
-          text: 'Optimized product image from StudioDrop ready for marketplace listing.',
+          text: 'Foto de producto optimizada desde StudioDrop lista para publicar.',
           url: window.location.href,
         })
         .catch(() => {});
@@ -119,7 +119,7 @@ export const ExportView: React.FC<ExportViewProps> = ({
         {/* Live Canvas Render Pill */}
         <div className="absolute top-4 right-4 flex items-center gap-2 bg-white/85 backdrop-blur-md py-1 px-3 rounded-full shadow-xs">
           <span className="w-2 h-2 rounded-full bg-[#8e2f4f] animate-pulse"></span>
-          <span className="text-[11px] font-semibold text-[#1c1b1c]">Live Canvas Render</span>
+          <span className="text-[11px] font-semibold text-[#1c1b1c]">Renderizado en vivo</span>
         </div>
       </div>
 
@@ -137,10 +137,10 @@ export const ExportView: React.FC<ExportViewProps> = ({
               </span>
             </div>
             <h2 className="text-[22px] font-bold text-[#1c1b1c] tracking-tight">
-              Ready for Marketplace!
+              ¡Lista para publicar y vender!
             </h2>
             <p className="text-[12px] text-[#554246] max-w-xs mt-1">
-              Your edited product photo is optimized for maximum buyer conversion and speed.
+              Tu foto de producto editada está optimizada para maximizar tus ventas y cargar al instante.
             </p>
           </div>
 
@@ -174,7 +174,7 @@ export const ExportView: React.FC<ExportViewProps> = ({
               <div className="flex items-center gap-1.5 mt-1">
                 <span className="bg-[#ffd9e0] text-[#3f0019] text-[11px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
                   <span className="material-symbols-outlined text-[12px]">auto_fix_high</span>
-                  Clean Studio Light
+                  Luz de estudio impecable
                 </span>
               </div>
               <div className="flex items-center gap-2 mt-1.5 text-[#554246] text-[11px]">
@@ -191,7 +191,7 @@ export const ExportView: React.FC<ExportViewProps> = ({
           {/* Export Dimensions & Preset Dropdown */}
           <div className="flex flex-col gap-1.5">
             <label className="text-[13px] font-semibold text-[#1c1b1c] flex items-center justify-between">
-              <span>Export Dimensions &amp; Preset</span>
+              <span>Dimensiones y ajuste de exportación</span>
               <span className="text-[#8e2f4f] text-[11px] font-bold">{selectedPreset.aspect}</span>
             </label>
 
@@ -262,7 +262,7 @@ export const ExportView: React.FC<ExportViewProps> = ({
 
           {/* File Format Selector */}
           <div className="flex flex-col gap-1.5">
-            <label className="text-[13px] font-semibold text-[#1c1b1c]">File Format</label>
+            <label className="text-[13px] font-semibold text-[#1c1b1c]">Formato de archivo</label>
             <div className="grid grid-cols-3 gap-2 bg-[#f1edee] p-1 rounded-2xl">
               <button
                 type="button"
@@ -279,7 +279,7 @@ export const ExportView: React.FC<ExportViewProps> = ({
                     <span className="w-1.5 h-1.5 rounded-full bg-[#8e2f4f]"></span>
                   )}
                 </div>
-                <span className="text-[10px] text-[#8e2f4f] font-semibold">Smallest</span>
+                <span className="text-[10px] text-[#8e2f4f] font-semibold">Más liviano</span>
               </button>
 
               <button
@@ -297,7 +297,7 @@ export const ExportView: React.FC<ExportViewProps> = ({
                     <span className="w-1.5 h-1.5 rounded-full bg-[#8e2f4f]"></span>
                   )}
                 </div>
-                <span className="text-[10px] text-[#554246]">Transparent</span>
+                <span className="text-[10px] text-[#554246]">Transparente</span>
               </button>
 
               <button
@@ -315,7 +315,7 @@ export const ExportView: React.FC<ExportViewProps> = ({
                     <span className="w-1.5 h-1.5 rounded-full bg-[#8e2f4f]"></span>
                   )}
                 </div>
-                <span className="text-[10px] text-[#554246]">Fastest Load</span>
+                <span className="text-[10px] text-[#554246]">Carga rápida</span>
               </button>
             </div>
           </div>
@@ -327,7 +327,7 @@ export const ExportView: React.FC<ExportViewProps> = ({
                 <span className="material-symbols-outlined text-[#8e2f4f] text-[18px]">
                   high_density
                 </span>
-                <span className="text-[13px] font-semibold text-[#1c1b1c]">Quality Profile</span>
+                <span className="text-[13px] font-semibold text-[#1c1b1c]">Perfil de calidad</span>
               </div>
               <span className="text-[11px] font-bold text-[#8e2f4f] bg-[#ffd9e0] px-2.5 py-0.5 rounded-full">
                 {getQualityText()}
@@ -347,8 +347,8 @@ export const ExportView: React.FC<ExportViewProps> = ({
             </div>
 
             <div className="flex justify-between text-[10px] text-[#554246]">
-              <span>Web Balanced (80%)</span>
-              <span>Studio High (90%)</span>
+              <span>Balanceada Web (80%)</span>
+              <span>Estudio Alta (90%)</span>
               <span>Ultra HD (100%)</span>
             </div>
           </div>
@@ -378,10 +378,10 @@ export const ExportView: React.FC<ExportViewProps> = ({
               </span>
               <span>
                 {downloadState === 'packaging'
-                  ? 'Packaging high-res asset...'
+                  ? 'Empaquetando imagen en alta...'
                   : downloadState === 'success'
-                  ? 'Saved to Camera Roll!'
-                  : `Download Photo (${selectedPreset.size})`}
+                  ? '¡Guardada en tu galería!'
+                  : `Descargar foto (${selectedPreset.size})`}
               </span>
             </button>
 
@@ -394,7 +394,7 @@ export const ExportView: React.FC<ExportViewProps> = ({
                 <span className="material-symbols-outlined text-[18px]">
                   {copySuccess ? 'check' : 'link'}
                 </span>
-                <span>{copySuccess ? 'Link Copied!' : 'Copy Asset Link'}</span>
+                <span>{copySuccess ? '¡Enlace copiado!' : 'Copiar enlace del archivo'}</span>
               </button>
 
               <button
@@ -403,7 +403,7 @@ export const ExportView: React.FC<ExportViewProps> = ({
                 className="py-2.5 px-3 bg-[#f1edee] hover:bg-[#ebe7e8] text-[#1c1b1c] rounded-full text-[13px] font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
               >
                 <span className="material-symbols-outlined text-[18px]">palette</span>
-                <span>Back to Edit</span>
+                <span>Volver a editar</span>
               </button>
             </div>
 
@@ -413,7 +413,7 @@ export const ExportView: React.FC<ExportViewProps> = ({
               className="w-full py-2 text-center text-[#701738] text-[12px] font-semibold flex items-center justify-center gap-1 hover:underline cursor-pointer"
             >
               <span className="material-symbols-outlined text-[16px]">share</span>
-              <span>Direct Export to Poshmark, eBay &amp; Depop draft queue</span>
+              <span>Exportación directa a Mercado Libre, Tiendanube y redes</span>
             </button>
           </div>
         </div>
@@ -428,7 +428,7 @@ export const ExportView: React.FC<ExportViewProps> = ({
                 <span className="w-8 h-8 rounded-full bg-[#ffd9e0] text-[#8e2f4f] flex items-center justify-center font-bold">
                   ⚡
                 </span>
-                <h3 className="text-[16px] font-bold text-[#1c1b1c]">Draft Marketplace Sync</h3>
+                <h3 className="text-[16px] font-bold text-[#1c1b1c]">Sincronización con canales de venta</h3>
               </div>
               <button
                 onClick={() => setQueueModalOpen(false)}
@@ -439,26 +439,26 @@ export const ExportView: React.FC<ExportViewProps> = ({
             </div>
 
             <p className="text-[13px] text-[#554246]">
-              Your photo is formatted to 1200×1600 px with optimized color profile for:
+              Tu foto está formateada a 1200×1600 px con perfil de color optimizado para:
             </p>
 
             <div className="space-y-2">
               <div className="flex items-center justify-between p-2.5 bg-[#f6f3f4] rounded-xl text-[13px]">
-                <span className="font-semibold text-[#1c1b1c]">Poshmark Bot Sync</span>
+                <span className="font-semibold text-[#1c1b1c]">Tiendanube / Tiendas Web</span>
                 <span className="text-emerald-700 font-bold flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[14px]">check</span> Ready
+                  <span className="material-symbols-outlined text-[14px]">check</span> Lista
                 </span>
               </div>
               <div className="flex items-center justify-between p-2.5 bg-[#f6f3f4] rounded-xl text-[13px]">
-                <span className="font-semibold text-[#1c1b1c]">Depop Drafter</span>
+                <span className="font-semibold text-[#1c1b1c]">Mercado Libre y Marketplaces</span>
                 <span className="text-emerald-700 font-bold flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[14px]">check</span> Ready
+                  <span className="material-symbols-outlined text-[14px]">check</span> Lista
                 </span>
               </div>
               <div className="flex items-center justify-between p-2.5 bg-[#f6f3f4] rounded-xl text-[13px]">
-                <span className="font-semibold text-[#1c1b1c]">Shopify Products Feed</span>
+                <span className="font-semibold text-[#1c1b1c]">Catálogo de Instagram y WhatsApp</span>
                 <span className="text-emerald-700 font-bold flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[14px]">check</span> Ready
+                  <span className="material-symbols-outlined text-[14px]">check</span> Lista
                 </span>
               </div>
             </div>
@@ -471,7 +471,7 @@ export const ExportView: React.FC<ExportViewProps> = ({
               }}
               className="w-full py-3 bg-[#8e2f4f] hover:bg-[#701738] text-white rounded-full font-bold text-[13px] shadow-sm cursor-pointer"
             >
-              Push to Drafts &amp; Return to Studio
+              Enviar a borradores y volver al estudio
             </button>
           </div>
         </div>

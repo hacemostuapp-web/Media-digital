@@ -1,6 +1,6 @@
 {
   "name": "StudioDrop",
-  "description": "AI Product Photo Studio for Top Resellers with background removal, lighting refinement, and marketplace export optimization.",
+  "description": "Estudio de fotografía de producto con IA para revendedores de indumentaria y boutiques: remoción de fondos, refinamiento de luz y optimización para marketplaces.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

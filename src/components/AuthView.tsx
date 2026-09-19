@@ -18,7 +18,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ user, onLoginSuccess, onClos
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setStatusMessage(mode === 'login' ? 'Signing in...' : 'Creating boutique account...');
+    setStatusMessage(mode === 'login' ? 'Iniciando sesión...' : 'Creando cuenta de boutique...');
 
     setTimeout(() => {
       onLoginSuccess({
@@ -38,7 +38,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ user, onLoginSuccess, onClos
       <div className="flex flex-col items-center text-center space-y-2 mb-6">
         <div className="relative p-1 rounded-2xl bg-[#f1edee] shadow-sm flex items-center justify-center">
           <img
-            alt="StudioDrop Camera Spark Logo"
+            alt="Logo de StudioDrop"
             className="w-14 h-14 object-contain rounded-xl"
             src={LOGO_URL}
           />
@@ -58,8 +58,8 @@ export const AuthView: React.FC<AuthViewProps> = ({ user, onLoginSuccess, onClos
               auto_awesome
             </span>
           </div>
-          <p className="text-[13px] text-[#554246] max-w-[260px] mx-auto leading-relaxed">
-            AI Product Photo Studio for Top Resellers
+          <p className="text-[13px] text-[#554246] max-w-[280px] mx-auto leading-relaxed">
+            Estudio de fotos de producto con IA para revendedores top
           </p>
         </div>
       </div>
@@ -75,7 +75,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ user, onLoginSuccess, onClos
               : 'text-[#554246] hover:text-[#1c1b1c]'
           }`}
         >
-          Log In
+          Iniciar sesión
         </button>
         <button
           type="button"
@@ -86,7 +86,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ user, onLoginSuccess, onClos
               : 'text-[#554246] hover:text-[#1c1b1c]'
           }`}
         >
-          Sign Up
+          Registrate
         </button>
       </div>
 
@@ -102,7 +102,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ user, onLoginSuccess, onClos
           {/* Work Email Field */}
           <div className="flex flex-col space-y-1.5">
             <label className="text-[11px] font-bold text-[#554246] uppercase tracking-wider pl-1">
-              Work Email
+              Email comercial o de tu tienda
             </label>
             <div className="relative flex items-center">
               <span className="material-symbols-outlined absolute left-3.5 text-[#877276] text-[18px] pointer-events-none">
@@ -113,7 +113,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ user, onLoginSuccess, onClos
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="seller@boutique.com"
+                placeholder="tu_tienda@boutique.com"
                 className="w-full h-11 pl-10 pr-4 bg-[#f6f3f4] text-[#1c1b1c] placeholder:text-[#877276] text-[13px] rounded-xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#8e2f4f]/20 transition-all"
               />
             </div>
@@ -123,7 +123,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ user, onLoginSuccess, onClos
           {mode === 'signup' && (
             <div className="flex flex-col space-y-1.5">
               <label className="text-[11px] font-bold text-[#554246] uppercase tracking-wider pl-1">
-                Store / Curator Name
+                Nombre de tu tienda o marca
               </label>
               <div className="relative flex items-center">
                 <span className="material-symbols-outlined absolute left-3.5 text-[#877276] text-[18px] pointer-events-none">
@@ -134,7 +134,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ user, onLoginSuccess, onClos
                   required
                   value={storeName}
                   onChange={(e) => setStoreName(e.target.value)}
-                  placeholder="The Vintage Archive"
+                  placeholder="Vintage Buenos Aires"
                   className="w-full h-11 pl-10 pr-4 bg-[#f6f3f4] text-[#1c1b1c] placeholder:text-[#877276] text-[13px] rounded-xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#8e2f4f]/20 transition-all"
                 />
               </div>
@@ -145,15 +145,15 @@ export const AuthView: React.FC<AuthViewProps> = ({ user, onLoginSuccess, onClos
           <div className="flex flex-col space-y-1.5">
             <div className="flex items-center justify-between pl-1">
               <label className="text-[11px] font-bold text-[#554246] uppercase tracking-wider">
-                Password
+                Contraseña
               </label>
               {mode === 'login' && (
                 <button
                   type="button"
-                  onClick={() => alert('Password reset link sent to your work email!')}
+                  onClick={() => alert('¡Te enviamos el enlace para restablecer tu contraseña a tu email!')}
                   className="text-[11px] font-semibold text-[#701738] hover:text-[#8e2f4f] transition-colors cursor-pointer"
                 >
-                  Forgot password?
+                  ¿Olvidaste tu contraseña?
                 </button>
               )}
             </div>
@@ -187,7 +187,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ user, onLoginSuccess, onClos
             type="submit"
             className="w-full h-12 bg-[#8e2f4f] hover:bg-[#701738] text-white font-bold text-[14px] rounded-full shadow-md flex items-center justify-center gap-2 mt-2 active:scale-[0.98] transition-transform duration-100 cursor-pointer"
           >
-            <span>{mode === 'login' ? 'Sign In to Studio' : 'Create Boutique Account'}</span>
+            <span>{mode === 'login' ? 'Entrar al Estudio' : 'Crear cuenta de boutique'}</span>
             <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
           </button>
         </form>
@@ -196,7 +196,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ user, onLoginSuccess, onClos
         <div className="relative flex py-1 items-center">
           <div className="flex-grow h-[1px] bg-[#e5e1e2]"></div>
           <span className="flex-shrink mx-3 text-[10px] font-bold text-[#877276] uppercase tracking-wider">
-            or continue with
+            o continuá con
           </span>
           <div className="flex-grow h-[1px] bg-[#e5e1e2]"></div>
         </div>
@@ -254,20 +254,20 @@ export const AuthView: React.FC<AuthViewProps> = ({ user, onLoginSuccess, onClos
       <div className="mt-4 max-w-sm w-full bg-[#ffd9e0]/40 rounded-xl p-3 flex items-center justify-center gap-2 text-[#3f0019] text-center border border-[#ffd9e0]">
         <span className="text-[#701738] font-bold">⚡</span>
         <span className="text-[11px] font-semibold">
-          Optimized for Poshmark, eBay, Depop, &amp; Shopify
+          Optimizado para Mercado Libre, Tiendanube, Instagram y tiendas online
         </span>
       </div>
 
       {/* Switch Mode Footer Prompt */}
       <div className="mt-5 text-center flex flex-col items-center gap-2">
         <p className="text-[13px] text-[#554246]">
-          {mode === 'login' ? "Don't have an account?" : 'Already have an account?'}
+          {mode === 'login' ? '¿No tenés una cuenta?' : '¿Ya tenés una cuenta?'}
           <button
             type="button"
             onClick={() => setMode(mode === 'login' ? 'signup' : 'login')}
             className="text-[13px] font-bold text-[#701738] hover:text-[#8e2f4f] ml-1.5 underline cursor-pointer"
           >
-            {mode === 'login' ? 'Sign up free' : 'Log in'}
+            {mode === 'login' ? 'Registrate gratis' : 'Iniciá sesión'}
           </button>
         </p>
 
@@ -276,7 +276,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ user, onLoginSuccess, onClos
           onClick={onClose}
           className="text-[12px] text-[#877276] hover:text-[#1c1b1c] mt-2 cursor-pointer"
         >
-          ← Return to Studio
+          ← Volver al estudio
         </button>
       </div>
     </div>

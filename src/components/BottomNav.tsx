@@ -8,10 +8,10 @@ interface BottomNavProps {
 
 export const BottomNav: React.FC<BottomNavProps> = ({ currentScreen, onNavigate }) => {
   const navItems: { id: ActiveScreen; label: string; icon: string }[] = [
-    { id: 'dashboard', label: 'Dashboard', icon: 'dashboard' },
-    { id: 'catalog', label: 'Catalog', icon: 'photo_library' },
-    { id: 'presets', label: 'Presets', icon: 'style' },
-    { id: 'settings', label: 'Settings', icon: 'tune' },
+    { id: 'dashboard', label: 'Inicio', icon: 'dashboard' },
+    { id: 'catalog', label: 'Catálogo', icon: 'photo_library' },
+    { id: 'presets', label: 'Ajustes', icon: 'style' },
+    { id: 'settings', label: 'Configuración', icon: 'tune' },
   ];
 
   return (

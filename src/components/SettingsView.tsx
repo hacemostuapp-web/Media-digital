@@ -33,9 +33,9 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-[20px] font-bold text-[#1c1b1c]">Studio Settings</h2>
+            <h2 className="text-[20px] font-bold text-[#1c1b1c]">Ajustes del Estudio</h2>
             <p className="text-[12px] text-[#554246]">
-              Manage boutique branding, export presets, and account plan.
+              Gestioná la marca de tu tienda, preferencias de exportación y tu plan de cuenta.
             </p>
           </div>
           <button
@@ -43,13 +43,13 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             className="text-[12px] text-[#8e2f4f] hover:underline font-semibold flex items-center gap-1 cursor-pointer"
           >
             <span className="material-symbols-outlined text-[16px]">logout</span>
-            <span>Switch Account</span>
+            <span>Cambiar de cuenta</span>
           </button>
         </div>
 
         {savedMsg && (
           <div className="p-3 bg-emerald-100 text-emerald-800 rounded-2xl text-[12px] font-bold text-center animate-in fade-in">
-            ✓ Settings updated successfully!
+            ✓ ¡Ajustes guardados con éxito!
           </div>
         )}
 
@@ -69,7 +69,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             <span className="text-[11px] text-[#877276] truncate">{user.email}</span>
           </div>
           <span className="px-2.5 py-1 bg-[#ffd9e0] text-[#701738] rounded-full text-[11px] font-bold">
-            Pro Reseller
+            Revendedora Pro
           </span>
         </div>
 
@@ -78,7 +78,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           <div className="flex items-center justify-between">
             <span className="text-[14px] font-bold text-[#1c1b1c]">{user.tier}</span>
             <span className="text-[12px] font-bold text-[#8e2f4f]">
-              {user.usedCredits} / {user.totalCredits} photos used
+              {user.usedCredits} / {user.totalCredits} fotos usadas
             </span>
           </div>
 
@@ -90,8 +90,8 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           </div>
 
           <div className="flex items-center justify-between pt-1 text-[11px] text-[#554246]">
-            <span>Resets monthly • High-res neural processing</span>
-            <span>Renews in {user.renewsInDays} days</span>
+            <span>Se reinicia cada mes • Procesamiento neuronal en alta resolución</span>
+            <span>Renueva en {user.renewsInDays} días</span>
           </div>
 
           <button
@@ -100,16 +100,16 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             className="w-full py-2.5 bg-[#701738] hover:bg-[#8e2f4f] text-white rounded-full text-[13px] font-bold flex items-center justify-center gap-1.5 shadow-sm active:scale-98 transition-all cursor-pointer"
           >
             <span className="material-symbols-outlined text-[16px] text-[#ffd9e0]">auto_awesome</span>
-            <span>Upgrade to Unlimited ($19/mo)</span>
+            <span>Pasate a Ilimitado ($19/mes)</span>
           </button>
         </div>
 
         {/* Store & Export Preferences Form */}
         <form onSubmit={handleSave} className="bg-white rounded-2xl p-4 border border-[#f1edee] shadow-xs space-y-3.5">
-          <h3 className="text-[14px] font-bold text-[#1c1b1c]">Boutique Branding &amp; Defaults</h3>
+          <h3 className="text-[14px] font-bold text-[#1c1b1c]">Marca de la tienda y preferencias</h3>
 
           <div className="space-y-1">
-            <label className="text-[11px] font-bold text-[#554246] uppercase">Curator Name</label>
+            <label className="text-[11px] font-bold text-[#554246] uppercase">Nombre del titular / curador</label>
             <input
               type="text"
               value={userName}
@@ -119,7 +119,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           </div>
 
           <div className="space-y-1">
-            <label className="text-[11px] font-bold text-[#554246] uppercase">Store / Shopfront Handle</label>
+            <label className="text-[11px] font-bold text-[#554246] uppercase">Nombre o usuario de la tienda</label>
             <input
               type="text"
               value={storeName}
@@ -131,8 +131,8 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           <div className="pt-2 border-t border-[#f1edee] space-y-2.5">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-[13px] font-semibold text-[#1c1b1c]">Auto-Enhancement on Upload</p>
-                <p className="text-[11px] text-[#554246]">Automatically isolate edges and softbox lighting</p>
+                <p className="text-[13px] font-semibold text-[#1c1b1c]">Mejora automática al subir fotos</p>
+                <p className="text-[11px] text-[#554246]">Recorta bordes automáticamente y aplica luz softbox de estudio</p>
               </div>
               <button
                 type="button"
@@ -147,8 +147,8 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
 
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-[13px] font-semibold text-[#1c1b1c]">Default Export Format</p>
-                <p className="text-[11px] text-[#554246]">Smallest web size or lossless transparency</p>
+                <p className="text-[13px] font-semibold text-[#1c1b1c]">Formato de exportación predeterminado</p>
+                <p className="text-[11px] text-[#554246]">Menor peso para web o transparencia sin pérdida</p>
               </div>
               <div className="flex items-center gap-1 bg-[#f1edee] p-0.5 rounded-lg">
                 <button
@@ -177,7 +177,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             type="submit"
             className="w-full py-2.5 bg-[#8e2f4f] hover:bg-[#701738] text-white rounded-full text-[13px] font-bold shadow-xs cursor-pointer"
           >
-            Save Preferences
+            Guardar cambios
           </button>
         </form>
       </div>

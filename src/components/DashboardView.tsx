@@ -44,18 +44,18 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       const result = e.target?.result as string;
       const newPhoto: StudioPhoto = {
         id: `photo-${Date.now()}`,
-        filename: file.name || 'imported_product.jpg',
+        filename: file.name || 'producto_importado.jpg',
         dimensions: '2400 × 3000 px',
         filesize: `${(file.size / (1024 * 1024)).toFixed(1)} MB`,
         status: 'raw',
-        badgeText: 'Raw Unedited',
+        badgeText: 'Original sin editar',
         badgeType: 'neutral',
-        timeAgo: 'Just now',
+        timeAgo: 'Recién',
         thumbnailUrl: result,
         rawImageUrl: result,
         isolatedImageUrl: result,
         altText: file.name,
-        presetApplied: 'Raw Natural',
+        presetApplied: 'Natural Original',
         contrast: 0,
         saturation: 0,
         brightness: 0,
@@ -105,7 +105,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             </div>
             <div className="flex flex-col min-w-0">
               <h1 className="text-[19px] font-bold text-[#1c1b1c] truncate tracking-tight">
-                Welcome back, {user.name} 👋
+                ¡Qué bueno verte, {user.name}! 👋
               </h1>
               <span className="text-[12px] text-[#8e2f4f] font-semibold">
                 {user.storeName}
@@ -113,11 +113,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             </div>
           </div>
           <button
-            aria-label="Quick Switch Shop"
+            aria-label="Cambiar de tienda"
             onClick={onOpenStoreSwitch}
             className="w-10 h-10 flex items-center justify-center rounded-full bg-[#f6f3f4] text-[#554246] hover:text-[#701738] hover:bg-[#ebe7e8] transition-colors flex-shrink-0 cursor-pointer"
             type="button"
-            title="Switch Boutique Store"
+            title="Cambiar de tienda o local"
           >
             <span className="material-symbols-outlined text-[20px]">storefront</span>
           </button>
@@ -144,10 +144,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               <span className="material-symbols-outlined text-[32px]">add_a_photo</span>
             </div>
             <h2 className="text-[17px] font-semibold text-[#1c1b1c] mb-1">
-              Tap to upload or drop photos here
+              Tocá para subir o arrastrá fotos acá
             </h2>
-            <p className="text-[12px] text-[#554246] max-w-[280px] mb-4">
-              High-res JPG, PNG, HEIC up to 25MB • Auto-enhancement ready
+            <p className="text-[12px] text-[#554246] max-w-[320px] mb-4">
+              JPG, PNG, HEIC en alta resolución hasta 25 MB • Listo para auto-mejora
             </p>
             {/* Action Button */}
             <button
@@ -155,7 +155,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               type="button"
             >
               <span className="material-symbols-outlined text-[18px]">photo_library</span>
-              <span>Browse Camera Roll</span>
+              <span>Elegir del carrete o galería</span>
             </button>
           </div>
 
@@ -179,9 +179,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           <div className="space-y-2.5">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <h3 className="text-[16px] font-bold text-[#1c1b1c]">Recent Studio Photos</h3>
+                <h3 className="text-[16px] font-bold text-[#1c1b1c]">Fotos recientes de estudio</h3>
                 <span className="px-2.5 py-0.5 rounded-full bg-[#ffd9e0] text-[#3f0019] text-[11px] font-bold">
-                  {photos.length} items
+                  {photos.length} fotos
                 </span>
               </div>
               <button
@@ -189,7 +189,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 className="text-[#8e2f4f] text-[12px] font-semibold hover:underline flex items-center gap-0.5 cursor-pointer"
                 type="button"
               >
-                View all
+                Ver todas
                 <span className="material-symbols-outlined text-[16px]">chevron_right</span>
               </button>
             </div>
@@ -205,7 +205,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 }`}
                 type="button"
               >
-                All ({counts.all})
+                Todas ({counts.all})
               </button>
               <button
                 onClick={() => setActiveFilter('edited')}
@@ -216,7 +216,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 }`}
                 type="button"
               >
-                Edited ({counts.edited})
+                Editadas ({counts.edited})
               </button>
               <button
                 onClick={() => setActiveFilter('raw')}
@@ -227,7 +227,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 }`}
                 type="button"
               >
-                Raw ({counts.raw})
+                Originales ({counts.raw})
               </button>
               <button
                 onClick={() => setActiveFilter('exported')}
@@ -238,7 +238,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 }`}
                 type="button"
               >
-                Exported ({counts.exported})
+                Exportadas ({counts.exported})
               </button>
             </div>
           </div>
@@ -284,7 +284,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
                   {/* Quick Floating Action Button */}
                   <button
-                    aria-label={`Open editor for ${photo.filename}`}
+                    aria-label={`Abrir editor para ${photo.filename}`}
                     onClick={(e) => {
                       e.stopPropagation();
                       onSelectPhotoForEdit(photo);
@@ -324,9 +324,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <span className="text-[15px] font-bold text-[#1c1b1c]">Monthly Usage</span>
+              <span className="text-[15px] font-bold text-[#1c1b1c]">Uso mensual</span>
               <span className="text-[12px] font-semibold text-[#8e2f4f]">
-                {user.usedCredits} / {user.totalCredits} used
+                {user.usedCredits} de {user.totalCredits} usadas
               </span>
             </div>
 
@@ -340,7 +340,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
             <div className="flex items-center justify-between pt-1">
               <span className="text-[12px] text-[#554246]">{user.tier}</span>
-              <span className="text-[11px] text-[#877276]">Renews in {user.renewsInDays} days</span>
+              <span className="text-[11px] text-[#877276]">Se renueva en {user.renewsInDays} días</span>
             </div>
           </div>
 
@@ -351,7 +351,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             type="button"
           >
             <span className="material-symbols-outlined text-[18px] text-[#ffd9e0]">auto_awesome</span>
-            <span>Upgrade to Unlimited</span>
+            <span>Pasar al Plan Ilimitado</span>
           </button>
         </div>
       </div>

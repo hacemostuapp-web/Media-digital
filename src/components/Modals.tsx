@@ -28,7 +28,7 @@ export const StoreSwitcherModal: React.FC<StoreSwitcherModalProps> = ({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="material-symbols-outlined text-[#8e2f4f]">storefront</span>
-            <h3 className="text-[16px] font-bold text-[#1c1b1c]">Switch Boutique Shop</h3>
+            <h3 className="text-[16px] font-bold text-[#1c1b1c]">Cambiar de tienda o boutique</h3>
           </div>
           <button
             onClick={onClose}
@@ -57,7 +57,7 @@ export const StoreSwitcherModal: React.FC<StoreSwitcherModalProps> = ({
               >
                 <div>
                   <p className="text-[13px] font-bold text-[#1c1b1c]">{s.name}</p>
-                  <p className="text-[11px] text-[#554246]">{s.handle} • {s.count} items</p>
+                  <p className="text-[11px] text-[#554246]">{s.handle} • {s.count} productos</p>
                 </div>
                 {isCurrent && (
                   <span className="material-symbols-outlined text-[#8e2f4f] text-[20px]">
@@ -104,36 +104,36 @@ export const UpgradeModal: React.FC<UpgradeModalProps> = ({
         </div>
 
         <div>
-          <h3 className="text-[18px] font-bold text-[#1c1b1c]">StudioDrop Unlimited</h3>
+          <h3 className="text-[18px] font-bold text-[#1c1b1c]">StudioDrop Ilimitado</h3>
           <p className="text-[12px] text-[#554246] mt-0.5">
-            Full-resolution background removal and lighting enhancements without monthly limits.
+            Eliminación de fondo en alta resolución y mejoras de iluminación sin límites mensuales.
           </p>
         </div>
 
         <div className="space-y-2 text-[12px] text-[#1c1b1c]">
           <div className="flex items-center gap-2">
             <span className="text-emerald-600 font-bold">✓</span>
-            <span>Unlimited high-res AI photo processing</span>
+            <span>Procesamiento de fotos con IA ilimitado en alta resolución</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-emerald-600 font-bold">✓</span>
-            <span>Lossless 4K PNG alpha transparency cutout</span>
+            <span>Recorte con canal alfa transparente en PNG 4K sin pérdida</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-emerald-600 font-bold">✓</span>
-            <span>Bulk batch exports for Poshmark &amp; Shopify</span>
+            <span>Exportaciones por lote listas para Mercado Libre, Tiendanube y Shopify</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-emerald-600 font-bold">✓</span>
-            <span>All curated reseller packs &amp; studio lighting presets</span>
+            <span>Todos los packs para revendedores y ajustes de iluminación de estudio</span>
           </div>
         </div>
 
         <div className="p-3 bg-[#f6f3f4] rounded-2xl flex items-center justify-between">
-          <span className="text-[13px] font-semibold text-[#1c1b1c]">Monthly Plan</span>
+          <span className="text-[13px] font-semibold text-[#1c1b1c]">Plan mensual</span>
           <div className="text-right">
             <span className="text-[16px] font-bold text-[#8e2f4f]">$19</span>
-            <span className="text-[11px] text-[#554246]"> / month</span>
+            <span className="text-[11px] text-[#554246]"> / mes</span>
           </div>
         </div>
 
@@ -145,7 +145,7 @@ export const UpgradeModal: React.FC<UpgradeModalProps> = ({
           }}
           className="w-full py-3 bg-[#8e2f4f] hover:bg-[#701738] text-white rounded-full font-bold text-[14px] shadow-md active:scale-98 transition-all cursor-pointer"
         >
-          Activate Unlimited Access
+          Activar acceso ilimitado
         </button>
       </div>
     </div>

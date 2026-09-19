@@ -12,19 +12,19 @@ export const Header: React.FC<HeaderProps> = ({ currentScreen, onNavigate, user 
   const getSubtitle = () => {
     switch (currentScreen) {
       case 'dashboard':
-        return 'Dashboard';
+        return 'Panel Principal';
       case 'editor':
-        return 'Photo Editor';
+        return 'Editor de Fotos';
       case 'export':
-        return 'Download And Export';
+        return 'Descargar y Exportar';
       case 'catalog':
-        return 'Catalog & Batch';
+        return 'Catálogo y Lotes';
       case 'presets':
-        return 'Reseller Presets';
+        return 'Ajustes Preestablecidos';
       case 'settings':
-        return 'Settings';
+        return 'Configuración';
       default:
-        return 'Dashboard';
+        return 'Panel Principal';
     }
   };
 
@@ -37,7 +37,7 @@ export const Header: React.FC<HeaderProps> = ({ currentScreen, onNavigate, user 
         <div className="flex items-center gap-2 min-w-0">
           {showBackButton && (
             <button
-              aria-label="Go Back"
+              aria-label="Volver"
               onClick={() => onNavigate(currentScreen === 'export' ? 'editor' : 'dashboard')}
               className="w-10 h-10 flex items-center justify-center rounded-full text-[#1c1b1c] hover:bg-[#ebe7e8] active:scale-95 transition-all -ml-1 flex-shrink-0 cursor-pointer"
             >
@@ -50,7 +50,7 @@ export const Header: React.FC<HeaderProps> = ({ currentScreen, onNavigate, user 
             onClick={() => onNavigate('dashboard')}
           >
             <img
-              alt="StudioDrop Camera Spark Logo"
+              alt="Logo de StudioDrop"
               className="h-8 w-8 object-contain flex-shrink-0 rounded-lg"
               src={LOGO_URL}
             />
@@ -68,10 +68,10 @@ export const Header: React.FC<HeaderProps> = ({ currentScreen, onNavigate, user 
         {/* Right action icons */}
         <div className="flex items-center gap-1.5">
           <button
-            aria-label="Profile Options"
+            aria-label="Perfil y opciones"
             onClick={() => onNavigate('settings')}
             className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#ebe7e8] transition-colors cursor-pointer"
-            title="Account Profile"
+            title="Perfil de cuenta"
           >
             <img
               alt={user.name}
@@ -81,10 +81,10 @@ export const Header: React.FC<HeaderProps> = ({ currentScreen, onNavigate, user 
           </button>
 
           <button
-            aria-label="Authentication"
+            aria-label="Autenticación"
             onClick={() => onNavigate('auth')}
             className="w-10 h-10 flex items-center justify-center rounded-full text-[#554246] hover:text-[#8e2f4f] hover:bg-[#ebe7e8] transition-colors cursor-pointer"
-            title="Switch Account / Sign In"
+            title="Cambiar de cuenta / Iniciar sesión"
           >
             <span className="material-symbols-outlined text-[20px]">logout</span>
           </button>

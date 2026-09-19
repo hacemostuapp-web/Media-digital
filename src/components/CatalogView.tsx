@@ -37,10 +37,10 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
 
   const handleBatchDownload = () => {
     if (selectedIds.length === 0) return;
-    setBatchActionMsg(`Packaging ${selectedIds.length} assets for bulk export...`);
+    setBatchActionMsg(`Empaquetando ${selectedIds.length} fotos para exportación por lote...`);
     setTimeout(() => {
       setBatchActionMsg(null);
-      alert(`Successfully downloaded ${selectedIds.length} marketplace ready photos!`);
+      alert(`¡Descargaste con éxito ${selectedIds.length} fotos listas para publicar!`);
       setSelectedIds([]);
     }, 1500);
   };
@@ -51,9 +51,9 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
         {/* Header & Stats */}
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-[20px] font-bold text-[#1c1b1c]">Reseller Catalog</h2>
+            <h2 className="text-[20px] font-bold text-[#1c1b1c]">Catálogo de productos</h2>
             <p className="text-[12px] text-[#554246]">
-              {photos.length} items cataloged • Multi-platform formats ready
+              {photos.length} fotos en catálogo • Listas para múltiples canales
             </p>
           </div>
           <button
@@ -61,7 +61,7 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
             className="flex items-center gap-1 px-3.5 py-2 bg-[#8e2f4f] hover:bg-[#701738] text-white rounded-full text-[12px] font-bold shadow-xs cursor-pointer"
           >
             <span className="material-symbols-outlined text-[16px]">add_photo_alternate</span>
-            <span>Add Item</span>
+            <span>Agregar producto</span>
           </button>
         </div>
 
@@ -73,7 +73,7 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
             </span>
             <input
               type="text"
-              placeholder="Search product inventory..."
+              placeholder="Buscar productos en el catálogo..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full h-10 pl-9 pr-3 bg-white text-[#1c1b1c] placeholder:text-[#877276] text-[13px] rounded-xl border border-[#f1edee] focus:outline-none focus:ring-2 focus:ring-[#8e2f4f]/20"
@@ -92,7 +92,7 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
             <span className="material-symbols-outlined text-[16px]">
               {selectedIds.length === photos.length ? 'check_box' : 'check_box_outline_blank'}
             </span>
-            <span>{selectedIds.length > 0 ? `${selectedIds.length} Selected` : 'Select'}</span>
+            <span>{selectedIds.length > 0 ? `${selectedIds.length} seleccionados` : 'Seleccionar'}</span>
           </button>
         </div>
 
@@ -100,7 +100,7 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
         {selectedIds.length > 0 && (
           <div className="p-3 bg-white rounded-2xl border border-[#8e2f4f]/30 shadow-sm flex items-center justify-between animate-in fade-in">
             <span className="text-[12px] font-semibold text-[#8e2f4f]">
-              {selectedIds.length} items selected
+              {selectedIds.length} fotos seleccionadas
             </span>
             <div className="flex items-center gap-2">
               <button
@@ -109,7 +109,7 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
                 className="px-3 py-1.5 bg-[#8e2f4f] text-white rounded-full text-[12px] font-bold flex items-center gap-1 cursor-pointer"
               >
                 <span className="material-symbols-outlined text-[14px]">download</span>
-                <span>Export Selected</span>
+                <span>Exportar selección</span>
               </button>
               <button
                 type="button"
@@ -174,7 +174,7 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
                     {photo.filename}
                   </p>
                   <div className="flex items-center justify-between mt-1 text-[11px] text-[#554246]">
-                    <span>{photo.presetApplied || 'Clean Studio'}</span>
+                    <span>{photo.presetApplied || 'Estudio Limpio'}</span>
                     <span className="text-[#8e2f4f] font-semibold">{photo.filesize}</span>
                   </div>
                 </div>

@@ -28,11 +28,11 @@ export const PresetsView: React.FC<PresetsViewProps> = ({
   const presetList: PresetCardData[] = [
     {
       id: 'clean-white',
-      name: 'Clean White',
-      subtitle: 'Marketplace Compliance #1',
+      name: 'Blanco Puro',
+      subtitle: 'Cumplimiento para Marketplaces #1',
       description:
-        'Pure pristine neutral studio lighting with shadow feathering. Recommended by eBay and Google Shopping algorithms.',
-      badge: 'Best for Poshmark',
+        'Iluminación de estudio neutra e impecable con suavizado de sombras. Recomendado por los algoritmos de Mercado Libre y Google Shopping.',
+      badge: 'El mejor para catálogos',
       contrast: 18,
       saturation: 10,
       sampleImg:
@@ -41,11 +41,11 @@ export const PresetsView: React.FC<PresetsViewProps> = ({
     },
     {
       id: 'warm-lifestyle',
-      name: 'Warm Lifestyle',
-      subtitle: 'Boutique Aesthetic Lookbook',
+      name: 'Cálido Lifestyle',
+      subtitle: 'Lookbook y Estética Boutique',
       description:
-        'Gentle morning golden undertones and rich textile depth. Increases organic engagement on Depop and Instagram feeds.',
-      badge: 'Boutique Favorite',
+        'Tonos dorados cálidos de mañana y riqueza en texturas de telas. Aumenta la interacción orgánica en feeds de Instagram y tiendas.',
+      badge: 'Favorito de boutiques',
       contrast: 8,
       saturation: 22,
       sampleImg:
@@ -54,11 +54,11 @@ export const PresetsView: React.FC<PresetsViewProps> = ({
     },
     {
       id: 'minimal-grey',
-      name: 'Minimal Grey',
-      subtitle: 'Travertine & Concrete Studio',
+      name: 'Gris Minimalista',
+      subtitle: 'Estudio Travertino y Cemento',
       description:
-        'Subtle desaturation and balanced luminance that lets luxury leather and silk colors shine without color cast.',
-      badge: 'Luxury Curators',
+        'Desaturación sutil y luminancia balanceada que destaca colores de cueros y sedas de lujo sin teñir la foto.',
+      badge: 'Curaduría de lujo',
       contrast: 14,
       saturation: 0,
       sampleImg:
@@ -67,11 +67,11 @@ export const PresetsView: React.FC<PresetsViewProps> = ({
     },
     {
       id: 'depop-contrast',
-      name: 'Depop Contrast',
-      subtitle: 'High Dynamic Range & Pop',
+      name: 'Contraste Urbano',
+      subtitle: 'Alto Rango Dinámico y Pop',
       description:
-        'Punchy midtones and deep shadows for streetwear, vintage tees, and statement footwear. Maximizes click-throughs.',
-      badge: 'Streetwear & Vintage',
+        'Tonos medios intensos y sombras profundas para streetwear, remeras vintage y calzado statement. Maximiza clics.',
+      badge: 'Streetwear y Vintage',
       contrast: 28,
       saturation: 18,
       sampleImg:
@@ -83,7 +83,7 @@ export const PresetsView: React.FC<PresetsViewProps> = ({
   const handleApply = (preset: PresetCardData) => {
     setActivePresetId(preset.id);
     onApplyPresetToPhoto(preset.name, preset.contrast, preset.saturation);
-    setAppliedNotice(`Applied "${preset.name}" preset settings!`);
+    setAppliedNotice(`¡Se aplicó el ajuste "${preset.name}"!`);
     setTimeout(() => setAppliedNotice(null), 2500);
   };
 
@@ -93,13 +93,13 @@ export const PresetsView: React.FC<PresetsViewProps> = ({
         {/* Header */}
         <div className="flex flex-col">
           <div className="flex items-center gap-2">
-            <h2 className="text-[20px] font-bold text-[#1c1b1c]">Curated Reseller Presets</h2>
+            <h2 className="text-[20px] font-bold text-[#1c1b1c]">Ajustes para revendedores</h2>
             <span className="px-2 py-0.5 rounded-full bg-[#ffd9e0] text-[#701738] text-[10px] font-bold">
-              Pro Pack
+              Pack Pro
             </span>
           </div>
           <p className="text-[12px] text-[#554246]">
-            One-touch tone mapping engineered specifically for boutique resellers.
+            Calibración de color en un solo toque pensada especialmente para revendedores y boutiques.
           </p>
         </div>
 
@@ -155,9 +155,9 @@ export const PresetsView: React.FC<PresetsViewProps> = ({
 
                     <div className="flex items-center justify-between mt-3 pt-2 border-t border-[#f1edee]">
                       <div className="flex items-center gap-2 text-[11px] text-[#877276]">
-                        <span>Contrast: +{preset.contrast}%</span>
+                        <span>Contraste: +{preset.contrast}%</span>
                         <span>•</span>
-                        <span>Saturation: +{preset.saturation}%</span>
+                        <span>Saturación: +{preset.saturation}%</span>
                       </div>
                       <button
                         type="button"
@@ -171,7 +171,7 @@ export const PresetsView: React.FC<PresetsViewProps> = ({
                         <span className="material-symbols-outlined text-[14px]">
                           {isActive ? 'check' : 'auto_fix_high'}
                         </span>
-                        <span>{isActive ? 'Active' : 'Apply Preset'}</span>
+                        <span>{isActive ? 'Activo' : 'Aplicar ajuste'}</span>
                       </button>
                     </div>
                   </div>

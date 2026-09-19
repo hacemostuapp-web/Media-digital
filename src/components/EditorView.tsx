@@ -89,7 +89,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
       isLightingImproved,
       presetApplied: activePreset,
       status: 'edited',
-      badgeText: isBgRemoved ? 'Edited • BG Removed' : 'Edited • Studio Light',
+      badgeText: isBgRemoved ? 'Editada • Sin fondo' : 'Editada • Luz de estudio',
       badgeType: 'emerald',
     });
     onProceedToExport();
@@ -102,7 +102,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
         <div className="pt-1 pb-1 flex items-center justify-between">
           <div className="flex items-center gap-2.5 min-w-0">
             <button
-              aria-label="Back to gallery"
+              aria-label="Volver a la galería"
               onClick={onBack}
               className="w-8 h-8 rounded-full flex items-center justify-center bg-[#ebe7e8] text-[#1c1b1c] hover:bg-[#f1edee] transition-colors cursor-pointer"
             >
@@ -121,7 +121,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
           {/* Live Status Indicator */}
           <div className="flex items-center gap-1.5 px-3 py-1 bg-[#e5e1e2] rounded-full shadow-xs flex-shrink-0">
             <span className="w-2 h-2 rounded-full bg-[#701738] animate-pulse"></span>
-            <span className="text-[11px] text-[#8e2f4f] font-bold">Live Preview</span>
+            <span className="text-[11px] text-[#8e2f4f] font-bold">Vista previa en vivo</span>
           </div>
         </div>
 
@@ -153,8 +153,8 @@ export const EditorView: React.FC<EditorViewProps> = ({
               <div className="border-r border-b border-[#8e2f4f]/25"></div>
               <div className="border-r border-b border-[#8e2f4f]/25"></div>
               <div className="border-b border-[#8e2f4f]/25"></div>
-              <div className="border-r border-[#8e2f4f]/25"></div>
-              <div className="border-r border-[#8e2f4f]/25"></div>
+              <div className="border-r border-b border-[#8e2f4f]/25"></div>
+              <div className="border-r border-b border-[#8e2f4f]/25"></div>
               <div></div>
             </div>
           )}
@@ -195,13 +195,13 @@ export const EditorView: React.FC<EditorViewProps> = ({
                   ? 'bg-[#8e2f4f] text-white'
                   : 'bg-white/90 text-[#1c1b1c] hover:bg-white'
               }`}
-              title="Click and hold to compare with raw photo"
+              title="Mantené presionado para comparar con la foto original"
             >
               <span className="material-symbols-outlined text-[16px]">
                 {isComparing ? 'visibility' : 'compare'}
               </span>
               <span className="text-[11px] uppercase tracking-wider font-bold">
-                {isComparing ? 'Showing Raw' : 'Hold Before'}
+                {isComparing ? 'Foto original' : 'Mantené para ver antes'}
               </span>
             </button>
           </div>
@@ -215,7 +215,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
                   ? 'bg-[#8e2f4f] text-white'
                   : 'bg-white/90 text-[#554246] hover:text-[#701738]'
               }`}
-              title="Fit / Magnify Canvas"
+              title="Ajustar / Ampliar lienzo"
             >
               <span className="material-symbols-outlined text-[18px]">center_focus_strong</span>
             </button>
@@ -226,7 +226,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
                   ? 'bg-[#8e2f4f] text-white'
                   : 'bg-white/90 text-[#554246] hover:text-[#701738]'
               }`}
-              title="Toggle Rule-of-Thirds Grid Guide"
+              title="Mostrar / Ocultar regla de tercios"
             >
               <span className="material-symbols-outlined text-[18px]">grid_4x4</span>
             </button>
@@ -235,14 +235,14 @@ export const EditorView: React.FC<EditorViewProps> = ({
           {/* Quick Aspect Ratio Badge */}
           <div className="absolute bottom-3 left-3 z-30 px-2.5 py-1 rounded-lg bg-[#e5e1e2]/90 backdrop-blur-sm shadow-xs">
             <span className="text-[11px] text-[#1c1b1c] font-medium">
-              4:5 Poshmark / Depop Ready
+              4:5 Formato optimizado para tiendas y redes
             </span>
           </div>
 
           {/* Interactive Cutout Feedback Chip */}
           <div className="absolute bottom-3 right-3 z-30 flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#8e2f4f] text-white shadow-xs">
             <span className="material-symbols-outlined text-[14px]">auto_fix_high</span>
-            <span className="text-[11px] tracking-tight font-bold">Edge Auto-Refined</span>
+            <span className="text-[11px] tracking-tight font-bold">Bordes refinados con IA</span>
           </div>
         </div>
 
@@ -250,54 +250,54 @@ export const EditorView: React.FC<EditorViewProps> = ({
         <div className="pt-1 pb-1">
           <div className="flex items-center justify-between mb-2">
             <span className="text-[12px] text-[#1c1b1c] font-bold uppercase tracking-wider">
-              Curated Reseller Presets
+              Ajustes preestablecidos para revendedores
             </span>
-            <span className="text-[11px] text-[#8e2f4f] font-semibold">Custom Pack</span>
+            <span className="text-[11px] text-[#8e2f4f] font-semibold">Pack boutique</span>
           </div>
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
             <button
-              onClick={() => handleApplyPreset('Clean White', 18, 10)}
+              onClick={() => handleApplyPreset('Blanco Puro', 18, 10)}
               className={`px-3.5 py-2 rounded-full text-[12px] font-semibold flex items-center gap-1.5 shadow-xs whitespace-nowrap transition-transform active:scale-95 cursor-pointer ${
-                activePreset === 'Clean White'
+                activePreset === 'Blanco Puro' || activePreset === 'Clean White'
                   ? 'bg-[#8e2f4f] text-white'
                   : 'bg-[#e5e1e2] text-[#1c1b1c] hover:bg-[#f1edee]'
               }`}
             >
               <span className="material-symbols-outlined text-[16px]">check_circle</span>
-              <span>Clean White</span>
+              <span>Blanco Puro</span>
             </button>
             <button
-              onClick={() => handleApplyPreset('Warm Lifestyle', 8, 22)}
+              onClick={() => handleApplyPreset('Cálido Lifestyle', 8, 22)}
               className={`px-3.5 py-2 rounded-full text-[12px] font-semibold flex items-center gap-1.5 shadow-xs whitespace-nowrap transition-transform active:scale-95 cursor-pointer ${
-                activePreset === 'Warm Lifestyle'
+                activePreset === 'Cálido Lifestyle' || activePreset === 'Warm Lifestyle'
                   ? 'bg-[#8e2f4f] text-white'
                   : 'bg-[#e5e1e2] text-[#1c1b1c] hover:bg-[#f1edee]'
               }`}
             >
               <span className="material-symbols-outlined text-[16px] text-[#701738]">local_cafe</span>
-              <span>Warm Lifestyle</span>
+              <span>Cálido Lifestyle</span>
             </button>
             <button
-              onClick={() => handleApplyPreset('Minimal Grey', 14, 0)}
+              onClick={() => handleApplyPreset('Gris Minimalista', 14, 0)}
               className={`px-3.5 py-2 rounded-full text-[12px] font-semibold flex items-center gap-1.5 shadow-xs whitespace-nowrap transition-transform active:scale-95 cursor-pointer ${
-                activePreset === 'Minimal Grey'
+                activePreset === 'Gris Minimalista' || activePreset === 'Minimal Grey'
                   ? 'bg-[#8e2f4f] text-white'
                   : 'bg-[#e5e1e2] text-[#1c1b1c] hover:bg-[#f1edee]'
               }`}
             >
               <span className="material-symbols-outlined text-[16px] text-[#877276]">gradient</span>
-              <span>Minimal Grey</span>
+              <span>Gris Minimalista</span>
             </button>
             <button
-              onClick={() => handleApplyPreset('Depop Contrast', 28, 18)}
+              onClick={() => handleApplyPreset('Contraste Urbano', 28, 18)}
               className={`px-3.5 py-2 rounded-full text-[12px] font-semibold flex items-center gap-1.5 shadow-xs whitespace-nowrap transition-transform active:scale-95 cursor-pointer ${
-                activePreset === 'Depop Contrast'
+                activePreset === 'Contraste Urbano' || activePreset === 'Depop Contrast'
                   ? 'bg-[#8e2f4f] text-white'
                   : 'bg-[#e5e1e2] text-[#1c1b1c] hover:bg-[#f1edee]'
               }`}
             >
               <span className="material-symbols-outlined text-[16px] text-[#95435c]">flare</span>
-              <span>Depop Contrast</span>
+              <span>Contraste Urbano</span>
             </button>
           </div>
         </div>
@@ -313,13 +313,13 @@ export const EditorView: React.FC<EditorViewProps> = ({
                 </div>
                 <div className="flex flex-col">
                   <div className="flex items-center gap-2">
-                    <span className="text-[15px] font-bold text-[#1c1b1c]">Remove Background</span>
+                    <span className="text-[15px] font-bold text-[#1c1b1c]">Quitar fondo</span>
                     <span className="px-2 py-0.5 rounded-full bg-[#ffd9e0] text-[#3f0019] text-[10px] font-bold">
-                      AI Crisp Cutout
+                      Recorte con IA
                     </span>
                   </div>
                   <span className="text-[12px] text-[#554246]">
-                    Clean drop shadow on pristine backdrop
+                    Sombra suave sobre fondo impecable
                   </span>
                 </div>
               </div>
@@ -349,7 +349,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
                 className={`w-7 h-7 rounded-full bg-white shadow-xs border flex items-center justify-center cursor-pointer ${
                   selectedBackdrop === 'white' ? 'border-[#8e2f4f] ring-2 ring-[#8e2f4f]/20' : 'border-[#e5e1e2]'
                 }`}
-                title="Pure White Backdrop"
+                title="Fondo blanco puro"
               >
                 {selectedBackdrop === 'white' && (
                   <span className="material-symbols-outlined text-[16px] text-[#8e2f4f]">check</span>
@@ -362,7 +362,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
                 className={`w-7 h-7 rounded-full bg-[#ebe7e8] shadow-xs border flex items-center justify-center cursor-pointer ${
                   selectedBackdrop === 'neutral' ? 'border-[#8e2f4f] ring-2 ring-[#8e2f4f]/20' : 'border-transparent'
                 }`}
-                title="Neutral Soft Studio"
+                title="Estudio neutro suave"
               >
                 {selectedBackdrop === 'neutral' && (
                   <span className="material-symbols-outlined text-[16px] text-[#8e2f4f]">check</span>
@@ -375,7 +375,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
                 className={`w-7 h-7 rounded-full bg-[#f4ebd0] shadow-xs border flex items-center justify-center cursor-pointer ${
                   selectedBackdrop === 'beige' ? 'border-[#8e2f4f] ring-2 ring-[#8e2f4f]/20' : 'border-transparent'
                 }`}
-                title="Warm Boutique Beige"
+                title="Beige cálido de boutique"
               >
                 {selectedBackdrop === 'beige' && (
                   <span className="material-symbols-outlined text-[16px] text-[#8e2f4f]">check</span>
@@ -388,7 +388,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
                 className={`w-7 h-7 rounded-full bg-[#e8ecf2] shadow-xs border flex items-center justify-center cursor-pointer ${
                   selectedBackdrop === 'grey' ? 'border-[#8e2f4f] ring-2 ring-[#8e2f4f]/20' : 'border-transparent'
                 }`}
-                title="Cool Grey Floor"
+                title="Piso gris frío"
               >
                 {selectedBackdrop === 'grey' && (
                   <span className="material-symbols-outlined text-[16px] text-[#8e2f4f]">check</span>
@@ -401,7 +401,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
                 className={`w-7 h-7 rounded-full bg-white flex items-center justify-center shadow-xs border cursor-pointer ${
                   selectedBackdrop === 'transparent' ? 'border-[#8e2f4f] ring-2 ring-[#8e2f4f]/20' : 'border-[#e5e1e2]'
                 }`}
-                title="Transparent PNG"
+                title="PNG transparente"
               >
                 <span className="material-symbols-outlined text-[15px] text-[#554246]">grid_view</span>
               </button>
@@ -415,9 +415,9 @@ export const EditorView: React.FC<EditorViewProps> = ({
                 <span className="material-symbols-outlined text-[22px]">wb_incandescent</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-[15px] font-bold text-[#1c1b1c]">Improve Lighting</span>
+                <span className="text-[15px] font-bold text-[#1c1b1c]">Mejorar iluminación</span>
                 <span className="text-[12px] text-[#554246]">
-                  Studio Softbox AI Balance &amp; De-glare
+                  Balance softbox de estudio con IA y reducción de brillos
                 </span>
               </div>
             </div>
@@ -438,14 +438,14 @@ export const EditorView: React.FC<EditorViewProps> = ({
           {/* Fine Tuning Sliders Card */}
           <div className="bg-white rounded-2xl p-4 shadow-sm border border-[#f1edee] flex flex-col gap-4">
             <div className="flex items-center justify-between">
-              <span className="text-[15px] font-bold text-[#1c1b1c]">Fine-Tune Reseller Tone</span>
+              <span className="text-[15px] font-bold text-[#1c1b1c]">Ajustar tono del producto</span>
               <button
                 onClick={handleResetSliders}
                 className="text-[12px] font-semibold text-[#8e2f4f] hover:underline flex items-center gap-0.5 cursor-pointer"
                 type="button"
               >
                 <span className="material-symbols-outlined text-[14px]">restart_alt</span>
-                <span>Reset</span>
+                <span>Restablecer</span>
               </button>
             </div>
 
@@ -455,7 +455,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
                 <div className="flex items-center gap-1.5">
                   <span className="material-symbols-outlined text-[18px] text-[#877276]">tonality</span>
                   <label htmlFor="contrast-range" className="text-[13px] text-[#1c1b1c] font-semibold">
-                    Adjust Contrast
+                    Ajustar contraste
                   </label>
                 </div>
                 <div className="px-2 py-0.5 rounded-full bg-[#ebe7e8]">
@@ -473,7 +473,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
                   value={contrast}
                   onChange={(e) => {
                     setContrast(parseInt(e.target.value, 10));
-                    setActivePreset('Custom');
+                    setActivePreset('Personalizado');
                   }}
                   className="w-full h-2 bg-[#ebe7e8] rounded-full appearance-none cursor-pointer accent-[#8e2f4f]"
                 />
@@ -491,7 +491,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
                 <div className="flex items-center gap-1.5">
                   <span className="material-symbols-outlined text-[18px] text-[#877276]">palette</span>
                   <label htmlFor="sat-range" className="text-[13px] text-[#1c1b1c] font-semibold">
-                    Adjust Saturation
+                    Ajustar saturación
                   </label>
                 </div>
                 <div className="px-2 py-0.5 rounded-full bg-[#ebe7e8]">
@@ -509,7 +509,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
                   value={saturation}
                   onChange={(e) => {
                     setSaturation(parseInt(e.target.value, 10));
-                    setActivePreset('Custom');
+                    setActivePreset('Personalizado');
                   }}
                   className="w-full h-2 bg-[#ebe7e8] rounded-full appearance-none cursor-pointer accent-[#8e2f4f]"
                 />
@@ -531,7 +531,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
               onClick={onBack}
               className="flex-1 h-12 rounded-full bg-[#ebe7e8] hover:bg-[#e5e1e2] text-[#1c1b1c] text-[14px] font-semibold flex items-center justify-center gap-1 transition-all active:scale-95 cursor-pointer"
             >
-              <span>Cancel</span>
+              <span>Cancelar</span>
             </button>
 
             {/* Rich Burgundy Primary Solid Button */}
@@ -539,7 +539,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
               onClick={handleApplyAndNext}
               className="flex-[1.6] h-12 rounded-full bg-[#8e2f4f] hover:bg-[#701738] text-white text-[14px] font-semibold flex items-center justify-center gap-2 shadow-md transition-all active:scale-98 cursor-pointer"
             >
-              <span>Apply &amp; Next</span>
+              <span>Aplicar y continuar</span>
               <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
             </button>
           </div>
@@ -556,9 +556,9 @@ export const EditorView: React.FC<EditorViewProps> = ({
                     <span className="material-symbols-outlined text-[20px]">verified</span>
                   </div>
                   <div>
-                    <h3 className="text-[17px] font-bold text-[#1c1b1c] leading-tight">Master Shot Ready</h3>
+                    <h3 className="text-[17px] font-bold text-[#1c1b1c] leading-tight">¡Foto maestra lista!</h3>
                     <p className="text-[12px] text-[#554246]">
-                      Enhanced &amp; color calibrated for high conversion
+                      Mejorada y calibrada en color para máxima conversión
                     </p>
                   </div>
                 </div>
@@ -575,8 +575,8 @@ export const EditorView: React.FC<EditorViewProps> = ({
                   <div className="flex items-center gap-3">
                     <span className="material-symbols-outlined text-[#8e2f4f]">shopping_bag</span>
                     <div>
-                      <span className="text-[13px] font-semibold text-[#1c1b1c] block">Poshmark &amp; Depop Pack</span>
-                      <span className="text-[11px] text-[#554246]">Square 1:1 &amp; Portrait 4:5 JPEG</span>
+                      <span className="text-[13px] font-semibold text-[#1c1b1c] block">Pack para tiendas y marketplaces</span>
+                      <span className="text-[11px] text-[#554246]">JPEG cuadrado 1:1 y vertical 4:5</span>
                     </div>
                   </div>
                   <span className="material-symbols-outlined text-[#8e2f4f]">check_circle</span>
@@ -589,14 +589,14 @@ export const EditorView: React.FC<EditorViewProps> = ({
                   className="flex-1 h-12 rounded-full bg-[#ebe7e8] text-[#1c1b1c] text-[14px] font-semibold flex items-center justify-center gap-1.5 active:scale-95 transition-all cursor-pointer"
                 >
                   <span className="material-symbols-outlined text-[18px]">download</span>
-                  <span>Save to Photos</span>
+                  <span>Guardar en fotos</span>
                 </button>
                 <button
                   onClick={onProceedToExport}
                   className="flex-1 h-12 rounded-full bg-[#8e2f4f] text-white text-[14px] font-semibold flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition-all cursor-pointer"
                 >
                   <span className="material-symbols-outlined text-[18px]">rocket_launch</span>
-                  <span>Continue to Export</span>
+                  <span>Continuar a exportar</span>
                 </button>
               </div>
             </div>
