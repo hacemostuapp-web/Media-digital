@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StudioPhoto } from '../types';
+import { getResizedUrl } from '../services/cloudinaryService';
 
 interface ExportViewProps {
   photo: StudioPhoto;
@@ -60,26 +61,53 @@ export const ExportView: React.FC<ExportViewProps> = ({
     return `${quality}% Balanceada Web`;
   };
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     setDownloadState('packaging');
 
-    setTimeout(() => {
-      // Create a temporary link to download the photo
-      const downloadUrl = photo.isolatedImageUrl || photo.thumbnailUrl;
+    try {
+      // Extraer publicId del photo.id (formato: photo-{publicId})
+      const publicId = photo.id.replace('photo-', '');
+
+      // Determinar el tamaño basado en selectedPreset
+      let size: 'web' | 'stories' | 'pinterest' = 'web';
+      if (selectedPreset.title.includes('1080')) {
+        size = 'stories';
+      } else if (selectedPreset.title.includes('1000')) {
+        size = 'pinterest';
+      }
+
+      // Construir URL con transformaciones reales
+      const transformedUrl = getResizedUrl(publicId, size, {
+        contrast: photo.contrast,
+        saturation: photo.saturation,
+        brightness: photo.brightness,
+        removeBackground: photo.isBgRemoved,
+      });
+
+      // Descargar imagen desde Cloudinary
+      const response = await fetch(transformedUrl);
+      const blob = await response.blob();
+
+      // Crear URL local para descarga
+      const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
-      link.href = downloadUrl;
+      link.href = url;
       link.download = `${photo.filename.replace(/\.[^/.]+$/, '')}_estudio_export.${fileFormat}`;
-      link.target = '_blank';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
 
       setDownloadState('success');
 
       setTimeout(() => {
         setDownloadState('idle');
       }, 3000);
-    }, 1200);
+    } catch (error) {
+      console.error('Error descargando foto:', error);
+      alert('Error descargando la foto. Intentá de nuevo.');
+      setDownloadState('idle');
+    }
   };
 
   const handleCopyLink = () => {

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { StudioPhoto, UserProfile, PhotoStatus } from '../types';
+import { uploadPhotoToCloudinary } from '../services/cloudinaryService';
 
 interface DashboardViewProps {
   photos: StudioPhoto[];
@@ -20,6 +21,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 }) => {
   const [activeFilter, setActiveFilter] = useState<PhotoStatus>('all');
   const [isDragging, setIsDragging] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Filtered photos
@@ -38,12 +40,18 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     exported: photos.filter((p) => p.status === 'exported').length,
   };
 
-  const handleFileUpload = (file: File) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const result = e.target?.result as string;
+  const handleFileUpload = async (file: File) => {
+    if (!file.type.startsWith('image/')) {
+      alert('Por favor subí una imagen');
+      return;
+    }
+
+    setIsUploading(true);
+    try {
+      const { originalUrl, noBackgroundUrl, publicId } = await uploadPhotoToCloudinary(file);
+
       const newPhoto: StudioPhoto = {
-        id: `photo-${Date.now()}`,
+        id: `photo-${publicId}`,
         filename: file.name || 'producto_importado.jpg',
         dimensions: '2400 × 3000 px',
         filesize: `${(file.size / (1024 * 1024)).toFixed(1)} MB`,
@@ -51,9 +59,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         badgeText: 'Original sin editar',
         badgeType: 'neutral',
         timeAgo: 'Recién',
-        thumbnailUrl: result,
-        rawImageUrl: result,
-        isolatedImageUrl: result,
+        thumbnailUrl: originalUrl,
+        rawImageUrl: originalUrl,
+        isolatedImageUrl: noBackgroundUrl,
         altText: file.name,
         presetApplied: 'Natural Original',
         contrast: 0,
@@ -68,8 +76,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       };
       onAddNewPhoto(newPhoto);
       onSelectPhotoForEdit(newPhoto);
-    };
-    reader.readAsDataURL(file);
+    } catch (error) {
+      console.error('Error subiendo foto:', error);
+      alert('Error subiendo la foto. Intentá de nuevo.');
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -139,24 +151,41 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           <div className="absolute -top-12 -right-12 w-36 h-36 bg-[#ffd9e0]/40 rounded-full blur-2xl pointer-events-none"></div>
 
           <div className="relative z-10 flex flex-col items-center">
-            {/* Prominent Burgundy Icon */}
-            <div className="w-16 h-16 rounded-full bg-[#8e2f4f] text-white flex items-center justify-center shadow-md mb-3.5 transform group-hover:scale-105 transition-transform duration-300">
-              <span className="material-symbols-outlined text-[32px]">add_a_photo</span>
-            </div>
-            <h2 className="text-[17px] font-semibold text-[#1c1b1c] mb-1">
-              Tocá para subir o arrastrá fotos acá
-            </h2>
-            <p className="text-[12px] text-[#554246] max-w-[320px] mb-4">
-              JPG, PNG, HEIC en alta resolución hasta 25 MB • Listo para auto-mejora
-            </p>
-            {/* Action Button */}
-            <button
-              className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 bg-white text-[#8e2f4f] text-[13px] font-semibold rounded-full shadow-xs hover:bg-[#fcf8f9] hover:shadow transition-all pointer-events-none"
-              type="button"
-            >
-              <span className="material-symbols-outlined text-[18px]">photo_library</span>
-              <span>Elegir del carrete o galería</span>
-            </button>
+            {isUploading ? (
+              <>
+                {/* Loading State */}
+                <div className="w-16 h-16 rounded-full bg-[#ffd9e0] text-[#8e2f4f] flex items-center justify-center shadow-md mb-3.5 animate-pulse">
+                  <span className="material-symbols-outlined text-[32px]">cloud_upload</span>
+                </div>
+                <h2 className="text-[17px] font-semibold text-[#1c1b1c] mb-1">
+                  Subiendo tu foto...
+                </h2>
+                <p className="text-[12px] text-[#554246] max-w-[320px]">
+                  Procesando en Cloudinary ✨
+                </p>
+              </>
+            ) : (
+              <>
+                {/* Prominent Burgundy Icon */}
+                <div className="w-16 h-16 rounded-full bg-[#8e2f4f] text-white flex items-center justify-center shadow-md mb-3.5 transform group-hover:scale-105 transition-transform duration-300">
+                  <span className="material-symbols-outlined text-[32px]">add_a_photo</span>
+                </div>
+                <h2 className="text-[17px] font-semibold text-[#1c1b1c] mb-1">
+                  Tocá para subir o arrastrá fotos acá
+                </h2>
+                <p className="text-[12px] text-[#554246] max-w-[320px] mb-4">
+                  JPG, PNG, HEIC en alta resolución hasta 25 MB • Listo para auto-mejora
+                </p>
+                {/* Action Button */}
+                <button
+                  className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 bg-white text-[#8e2f4f] text-[13px] font-semibold rounded-full shadow-xs hover:bg-[#fcf8f9] hover:shadow transition-all pointer-events-none"
+                  type="button"
+                >
+                  <span className="material-symbols-outlined text-[18px]">photo_library</span>
+                  <span>Elegir del carrete o galería</span>
+                </button>
+              </>
+            )}
           </div>
 
           {/* Hidden File Input */}

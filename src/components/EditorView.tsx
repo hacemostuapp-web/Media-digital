@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StudioPhoto } from '../types';
+import { getTransformedUrl } from '../services/cloudinaryService';
 
 interface EditorViewProps {
   photo: StudioPhoto;
@@ -472,8 +473,15 @@ export const EditorView: React.FC<EditorViewProps> = ({
                   max="50"
                   value={contrast}
                   onChange={(e) => {
-                    setContrast(parseInt(e.target.value, 10));
+                    const newContrast = parseInt(e.target.value, 10);
+                    setContrast(newContrast);
                     setActivePreset('Personalizado');
+                    // Actualizar photo con nuevo contraste
+                    onUpdatePhoto({
+                      ...photo,
+                      contrast: newContrast,
+                      status: 'edited',
+                    });
                   }}
                   className="w-full h-2 bg-[#ebe7e8] rounded-full appearance-none cursor-pointer accent-[#8e2f4f]"
                 />
@@ -508,8 +516,15 @@ export const EditorView: React.FC<EditorViewProps> = ({
                   max="50"
                   value={saturation}
                   onChange={(e) => {
-                    setSaturation(parseInt(e.target.value, 10));
+                    const newSaturation = parseInt(e.target.value, 10);
+                    setSaturation(newSaturation);
                     setActivePreset('Personalizado');
+                    // Actualizar photo con nueva saturación
+                    onUpdatePhoto({
+                      ...photo,
+                      saturation: newSaturation,
+                      status: 'edited',
+                    });
                   }}
                   className="w-full h-2 bg-[#ebe7e8] rounded-full appearance-none cursor-pointer accent-[#8e2f4f]"
                 />
