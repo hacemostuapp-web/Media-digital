@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StudioPhoto } from '../types';
-import { getTransformedUrl } from '../services/cloudinaryService';
 
 interface EditorViewProps {
   photo: StudioPhoto;

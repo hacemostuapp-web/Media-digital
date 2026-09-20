@@ -48,7 +48,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
     setIsUploading(true);
     try {
-      const { originalUrl, noBackgroundUrl, publicId } = await uploadPhotoToCloudinary(file);
+      const { originalUrl, publicId } = await uploadPhotoToCloudinary(file);
 
       const newPhoto: StudioPhoto = {
         id: `photo-${publicId}`,
@@ -61,7 +61,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         timeAgo: 'Recién',
         thumbnailUrl: originalUrl,
         rawImageUrl: originalUrl,
-        isolatedImageUrl: noBackgroundUrl,
+        isolatedImageUrl: originalUrl,
         altText: file.name,
         presetApplied: 'Natural Original',
         contrast: 0,

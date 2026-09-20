@@ -435,15 +435,7 @@ export const ExportView: React.FC<ExportViewProps> = ({
               </button>
             </div>
 
-            <button
-              type="button"
-              onClick={handleShare}
-              className="w-full py-2 text-center text-[#701738] text-[12px] font-semibold flex items-center justify-center gap-1 hover:underline cursor-pointer"
-            >
-              <span className="material-symbols-outlined text-[16px]">share</span>
-              <span>Exportación directa a Mercado Libre, Tiendanube y redes</span>
-            </button>
-          </div>
+            </div>
         </div>
       </div>
 

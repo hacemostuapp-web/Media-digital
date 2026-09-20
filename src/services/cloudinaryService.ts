@@ -16,12 +16,11 @@ export async function uploadPhotoToCloudinary(
   file: File
 ): Promise<{
   originalUrl: string;
-  noBackgroundUrl: string;
   publicId: string;
 }> {
   const formData = new FormData();
   formData.append('file', file);
-  formData.append('upload_preset', 'studio_drop_photos'); // Sin firmar - solo upload básico
+  formData.append('upload_preset', 'studio_drop_photos');
   formData.append('folder', 'studiodrop/photos');
 
   try {
@@ -36,83 +35,16 @@ export async function uploadPhotoToCloudinary(
 
     const data = await response.json();
     const publicId = data.public_id;
-
-    // URL original
     const originalUrl = data.secure_url;
-
-    // URL con background removal automático
-    const noBackgroundUrl = buildCloudinaryUrl(publicId, {
-      background_removal: 'cloudinary_ai',
-      quality: 'auto',
-      fetch_format: 'auto',
-    });
 
     return {
       originalUrl,
-      noBackgroundUrl,
       publicId,
     };
   } catch (error) {
     console.error('Error subiendo foto a Cloudinary:', error);
     throw error;
   }
-}
-
-/**
- * Construye una URL de transformación de Cloudinary
- */
-export function buildCloudinaryUrl(
-  publicId: string,
-  transformations: Record<string, string | number> = {}
-): string {
-  const params = new URLSearchParams();
-  Object.entries(transformations).forEach(([key, value]) => {
-    params.append(key, String(value));
-  });
-
-  const queryString = params.toString() ? `?${params.toString()}` : '';
-  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto/${publicId}${queryString}`;
-}
-
-/**
- * Obtiene una URL con transformaciones específicas (contraste, saturación, etc)
- */
-export function getTransformedUrl(
-  publicId: string,
-  options: {
-    contrast?: number;
-    saturation?: number;
-    brightness?: number;
-    removeBackground?: boolean;
-    quality?: number;
-  } = {}
-): string {
-  const transformations: string[] = [];
-
-  // Contraste (-100 a 100 en Cloudinary)
-  if (options.contrast) {
-    transformations.push(`contrast:${options.contrast}`);
-  }
-
-  // Saturación (-100 a 100 en Cloudinary)
-  if (options.saturation) {
-    transformations.push(`saturation:${options.saturation}`);
-  }
-
-  // Brillo (-100 a 100 en Cloudinary)
-  if (options.brightness) {
-    transformations.push(`brightness:${options.brightness}`);
-  }
-
-  // Remover fondo
-  if (options.removeBackground) {
-    transformations.push('background_removal:cloudinary_ai');
-  }
-
-  const transformationString = transformations.join('/');
-  const quality = options.quality || 'auto';
-
-  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${transformationString}/q_${quality}/f_auto/${publicId}`;
 }
 
 /**
@@ -157,5 +89,6 @@ export function getResizedUrl(
 
   const transformationString = transformations.join('/');
 
-  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${transformationString}/q_auto/f_auto/${publicId}`;
+  // Construir URL correctamente con extensión
+  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${transformationString}/q_auto,f_jpg/${publicId}.jpg`;
 }
