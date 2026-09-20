@@ -89,6 +89,6 @@ export function getResizedUrl(
 
   const transformationString = transformations.join('/');
 
-  // Construir URL correctamente con extensión
-  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${transformationString}/q_auto,f_jpg/${publicId}.jpg`;
+  // Construir URL con extensión y flag de descarga
+  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${transformationString}/q_auto,f_jpg,fl_attachment/${publicId}.jpg`;
 }

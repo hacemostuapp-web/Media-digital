@@ -61,53 +61,41 @@ export const ExportView: React.FC<ExportViewProps> = ({
     return `${quality}% Balanceada Web`;
   };
 
-  const handleDownload = async () => {
+  const handleDownload = () => {
     setDownloadState('packaging');
 
-    try {
-      // Extraer publicId del photo.id (formato: photo-{publicId})
-      const publicId = photo.id.replace('photo-', '');
+    setTimeout(() => {
+      try {
+        // Extraer publicId del photo.id
+        const publicId = photo.id.replace('photo-', '');
 
-      // Determinar el tamaño basado en selectedPreset
-      let size: 'web' | 'stories' | 'pinterest' = 'web';
-      if (selectedPreset.title.includes('1080')) {
-        size = 'stories';
-      } else if (selectedPreset.title.includes('1000')) {
-        size = 'pinterest';
-      }
+        // Determinar tamaño
+        let size: 'web' | 'stories' | 'pinterest' = 'web';
+        if (selectedPreset.title.includes('1080')) {
+          size = 'stories';
+        } else if (selectedPreset.title.includes('1000')) {
+          size = 'pinterest';
+        }
 
-      // Construir URL con transformaciones reales
-      const transformedUrl = getResizedUrl(publicId, size, {
-        contrast: photo.contrast,
-        saturation: photo.saturation,
-        brightness: photo.brightness,
-        removeBackground: photo.isBgRemoved,
-      });
+        // Construir URL con transformaciones
+        const downloadUrl = getResizedUrl(publicId, size, {
+          contrast: photo.contrast,
+          saturation: photo.saturation,
+          brightness: photo.brightness,
+          removeBackground: photo.isBgRemoved,
+        });
 
-      // Descargar imagen desde Cloudinary
-      const response = await fetch(transformedUrl);
-      const blob = await response.blob();
+        // Link directo a Cloudinary con descarga
+        window.open(downloadUrl, '_blank');
 
-      // Crear URL local para descarga
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `${photo.filename.replace(/\.[^/.]+$/, '')}_estudio_export.${fileFormat}`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-
-      setDownloadState('success');
-
-      setTimeout(() => {
+        setDownloadState('success');
+        setTimeout(() => setDownloadState('idle'), 3000);
+      } catch (error) {
+        console.error('Error descargando:', error);
+        alert('Error descargando. Intentá de nuevo.');
         setDownloadState('idle');
-      }, 3000);
-    } catch (error) {
-      console.error('Error descargando foto:', error);
-      alert('Error descargando la foto. Intentá de nuevo.');
-      setDownloadState('idle');
-    }
+      }
+    }, 1200);
   };
 
   const handleCopyLink = () => {
