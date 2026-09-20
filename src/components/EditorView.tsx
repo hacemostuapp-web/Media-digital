@@ -71,12 +71,14 @@ export const EditorView: React.FC<EditorViewProps> = ({
     // Si tiene background removal, usar getResizedUrl con transformaciones
     if (isBgRemoved && photo.id) {
       const publicId = photo.id.replace('photo-', '');
-      return getResizedUrl(publicId, 'web', {
-        contrast: 0, // No aplicar contraste en URL, lo hacemos con CSS filter
-        saturation: 0, // No aplicar saturación en URL
+      const url = getResizedUrl(publicId, 'web', {
+        contrast: 0,
+        saturation: 0,
         removeBackground: true,
         backdropColor: selectedBackdrop,
       });
+      console.log('Background removal URL:', url, 'Backdrop:', selectedBackdrop);
+      return url;
     }
 
     // Si no, mostrar imagen raw sin transformaciones
