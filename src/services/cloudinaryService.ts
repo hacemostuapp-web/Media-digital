@@ -72,9 +72,9 @@ export function getResizedUrl(
     height = 1333;
   }
 
-  const transformations: string[] = [`w_${width}`, `h_${height}`, 'c_fill', 'g_auto'];
+  const transformations: string[] = [];
 
-  // Background removal con IA
+  // Background removal con IA PRIMERO (antes de resize)
   if (options?.removeBackground) {
     transformations.push('e_background_removal');
 
@@ -93,6 +93,9 @@ export function getResizedUrl(
     }
   }
 
+  // Resize después del background removal
+  transformations.push(`w_${width}`, `h_${height}`, 'c_fill', 'g_auto');
+
   // Agregar transformaciones adicionales con sintaxis correcta de Cloudinary
   if (options?.contrast) {
     transformations.push(`e_contrast:${options.contrast}`);
@@ -108,5 +111,6 @@ export function getResizedUrl(
 
   // Construir URL correctamente
   const format = options?.removeBackground && options?.backdropColor === 'transparent' ? 'png' : 'jpg';
-  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${transformationString}/q_auto,f_${format},fl_attachment/${publicId}.${format}`;
+  // Calidad: q_85 balanceo entre compresión y calidad
+  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${transformationString}/q_85,f_${format},fl_attachment/${publicId}.${format}`;
 }

@@ -23,7 +23,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
   // Local adjustment state derived from active photo
   const [contrast, setContrast] = useState(photo.contrast ?? 18);
   const [saturation, setSaturation] = useState(photo.saturation ?? 10);
-  const [isBgRemoved, setIsBgRemoved] = useState(photo.isBgRemoved ?? true);
+  const [isBgRemoved, setIsBgRemoved] = useState(photo.isBgRemoved ?? false);
   const [selectedBackdrop, setSelectedBackdrop] = useState<
     'white' | 'neutral' | 'beige' | 'grey' | 'transparent'
   >(photo.selectedBackdrop ?? 'white');
@@ -40,7 +40,9 @@ export const EditorView: React.FC<EditorViewProps> = ({
     const c = 1 + contrast / 100;
     const s = 1 + saturation / 100;
     const b = isLightingImproved ? 1.05 : 1.0;
-    return `contrast(${c}) saturate(${s}) brightness(${b}) drop-shadow(0 18px 24px rgba(64,56,60,0.18))`;
+    // No aplicar drop-shadow si el fondo está removido
+    const shadow = isBgRemoved ? '' : ' drop-shadow(0 18px 24px rgba(64,56,60,0.18))';
+    return `contrast(${c}) saturate(${s}) brightness(${b})${shadow}`;
   };
 
   // Preset pill click handler
@@ -67,8 +69,8 @@ export const EditorView: React.FC<EditorViewProps> = ({
     }
 
     // Si tiene background removal, usar getResizedUrl con transformaciones
-    if (isBgRemoved && photo.publicId) {
-      const publicId = photo.publicId.replace('photo-', '');
+    if (isBgRemoved && photo.id) {
+      const publicId = photo.id.replace('photo-', '');
       return getResizedUrl(publicId, 'web', {
         contrast: 0, // No aplicar contraste en URL, lo hacemos con CSS filter
         saturation: 0, // No aplicar saturación en URL
