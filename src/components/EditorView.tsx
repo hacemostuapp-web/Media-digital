@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StudioPhoto } from '../types';
+import { getResizedUrl } from '../services/cloudinaryService';
 
 interface EditorViewProps {
   photo: StudioPhoto;
@@ -47,6 +48,37 @@ export const EditorView: React.FC<EditorViewProps> = ({
     setActivePreset(name);
     setContrast(cVal);
     setSaturation(sVal);
+  };
+
+  // Actualizar color de fondo y guardar en photo
+  const handleBackdropChange = (color: 'white' | 'neutral' | 'beige' | 'grey' | 'transparent') => {
+    setSelectedBackdrop(color);
+    onUpdatePhoto({
+      ...photo,
+      selectedBackdrop: color,
+    });
+  };
+
+  // Construir URL de imagen con transformaciones aplicadas
+  const getImageUrl = () => {
+    // Si estamos en modo comparación, mostrar imagen raw
+    if (isComparing) {
+      return photo.rawImageUrl || photo.thumbnailUrl;
+    }
+
+    // Si tiene background removal, usar getResizedUrl con transformaciones
+    if (isBgRemoved && photo.publicId) {
+      const publicId = photo.publicId.replace('photo-', '');
+      return getResizedUrl(publicId, 'web', {
+        contrast: 0, // No aplicar contraste en URL, lo hacemos con CSS filter
+        saturation: 0, // No aplicar saturación en URL
+        removeBackground: true,
+        backdropColor: selectedBackdrop,
+      });
+    }
+
+    // Si no, mostrar imagen raw sin transformaciones
+    return photo.rawImageUrl || photo.thumbnailUrl;
   };
 
   // Reset sliders
@@ -167,13 +199,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
               className={`w-full h-full object-contain filter transition-all duration-200 ${
                 zoomFit ? 'scale-115' : 'scale-100'
               }`}
-              src={
-                isComparing
-                  ? photo.rawImageUrl || photo.thumbnailUrl
-                  : isBgRemoved
-                  ? photo.isolatedImageUrl || photo.thumbnailUrl
-                  : photo.rawImageUrl || photo.thumbnailUrl
-              }
+              src={getImageUrl()}
               style={{ filter: getFilterStyle() }}
             />
           </div>
@@ -338,7 +364,14 @@ export const EditorView: React.FC<EditorViewProps> = ({
               {/* Burgundy Toggle */}
               <button
                 aria-checked={isBgRemoved}
-                onClick={() => setIsBgRemoved(!isBgRemoved)}
+                onClick={() => {
+                  const newIsBgRemoved = !isBgRemoved;
+                  setIsBgRemoved(newIsBgRemoved);
+                  onUpdatePhoto({
+                    ...photo,
+                    isBgRemoved: newIsBgRemoved,
+                  });
+                }}
                 className={`w-12 h-7 rounded-full p-0.5 flex items-center transition-colors duration-200 cursor-pointer ${
                   isBgRemoved ? 'bg-[#8e2f4f] justify-end' : 'bg-[#e5e1e2] justify-start'
                 }`}
@@ -356,7 +389,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
             >
               {/* Pure White */}
               <button
-                onClick={() => setSelectedBackdrop('white')}
+                onClick={() => handleBackdropChange('white')}
                 className={`w-7 h-7 rounded-full bg-white shadow-xs border flex items-center justify-center cursor-pointer ${
                   selectedBackdrop === 'white' ? 'border-[#8e2f4f] ring-2 ring-[#8e2f4f]/20' : 'border-[#e5e1e2]'
                 }`}
@@ -369,7 +402,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
 
               {/* Neutral Studio */}
               <button
-                onClick={() => setSelectedBackdrop('neutral')}
+                onClick={() => handleBackdropChange('neutral')}
                 className={`w-7 h-7 rounded-full bg-[#ebe7e8] shadow-xs border flex items-center justify-center cursor-pointer ${
                   selectedBackdrop === 'neutral' ? 'border-[#8e2f4f] ring-2 ring-[#8e2f4f]/20' : 'border-transparent'
                 }`}
@@ -382,7 +415,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
 
               {/* Warm Boutique Beige */}
               <button
-                onClick={() => setSelectedBackdrop('beige')}
+                onClick={() => handleBackdropChange('beige')}
                 className={`w-7 h-7 rounded-full bg-[#f4ebd0] shadow-xs border flex items-center justify-center cursor-pointer ${
                   selectedBackdrop === 'beige' ? 'border-[#8e2f4f] ring-2 ring-[#8e2f4f]/20' : 'border-transparent'
                 }`}
@@ -395,7 +428,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
 
               {/* Cool Grey */}
               <button
-                onClick={() => setSelectedBackdrop('grey')}
+                onClick={() => handleBackdropChange('grey')}
                 className={`w-7 h-7 rounded-full bg-[#e8ecf2] shadow-xs border flex items-center justify-center cursor-pointer ${
                   selectedBackdrop === 'grey' ? 'border-[#8e2f4f] ring-2 ring-[#8e2f4f]/20' : 'border-transparent'
                 }`}
@@ -408,7 +441,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
 
               {/* Transparent PNG */}
               <button
-                onClick={() => setSelectedBackdrop('transparent')}
+                onClick={() => handleBackdropChange('transparent')}
                 className={`w-7 h-7 rounded-full bg-white flex items-center justify-center shadow-xs border cursor-pointer ${
                   selectedBackdrop === 'transparent' ? 'border-[#8e2f4f] ring-2 ring-[#8e2f4f]/20' : 'border-[#e5e1e2]'
                 }`}
