@@ -73,9 +73,9 @@ export function getResizedUrl(
 
   const transformations: string[] = [`w_${width}`, `h_${height}`, 'c_fill', 'g_auto'];
 
-  // Agregar transformaciones adicionales
+  // Agregar transformaciones adicionales con sintaxis correcta de Cloudinary
   if (options?.contrast) {
-    transformations.push(`e_brightness:${options.contrast}`);
+    transformations.push(`e_contrast:${options.contrast}`);
   }
   if (options?.saturation) {
     transformations.push(`e_saturation:${options.saturation}`);
