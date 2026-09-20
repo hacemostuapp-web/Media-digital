@@ -82,11 +82,11 @@ export function getResizedUrl(
     if (options.backdropColor === 'white') {
       transformations.push('b_white');
     } else if (options.backdropColor === 'neutral') {
-      transformations.push('b_#ebe7e8');
+      transformations.push('b_ebe7e8');
     } else if (options.backdropColor === 'beige') {
-      transformations.push('b_#f4ebd0');
+      transformations.push('b_f4ebd0');
     } else if (options.backdropColor === 'grey') {
-      transformations.push('b_#e8ecf2');
+      transformations.push('b_e8ecf2');
     } else if (options.backdropColor === 'transparent') {
       // Para transparente, usar PNG con fondo auto
       transformations.push('b_auto:predominant');
