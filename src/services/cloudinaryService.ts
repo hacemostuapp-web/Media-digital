@@ -77,8 +77,22 @@ export function getResizedUrl(
   // Background removal con IA PRIMERO (antes de resize)
   if (options?.removeBackground) {
     transformations.push('e_background_removal');
-    // Cloudinary background_removal por defecto retorna transparente
-    // No necesitamos agregar parámetro de color aquí
+
+    // Aplicar color de fondo DESPUÉS del background removal
+    if (options.backdropColor === 'white') {
+      transformations.push('b_white');
+    } else if (options.backdropColor === 'neutral') {
+      // Neutral: #ebe7e8
+      transformations.push('b_ebe7e8');
+    } else if (options.backdropColor === 'beige') {
+      // Beige: #f4ebd0
+      transformations.push('b_f4ebd0');
+    } else if (options.backdropColor === 'grey') {
+      // Grey: #e8ecf2
+      transformations.push('b_e8ecf2');
+    } else if (options.backdropColor === 'transparent') {
+      // Para transparente, no agregar background
+    }
   }
 
   // Resize después del background removal
@@ -98,8 +112,8 @@ export function getResizedUrl(
   const transformationString = transformations.join('/');
 
   // Construir URL correctamente
-  // Usar PNG siempre que hay background removal (necesita transparencia)
-  const format = options?.removeBackground ? 'png' : 'jpg';
+  // PNG solo para fondo transparente, JPG para colores
+  const format = options?.removeBackground && options?.backdropColor === 'transparent' ? 'png' : 'jpg';
   // Calidad: q_85 balanceo entre compresión y calidad
   return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${transformationString}/q_85,f_${format},fl_attachment/${publicId}.${format}`;
 }
