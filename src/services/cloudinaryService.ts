@@ -75,20 +75,17 @@ export function getResizedUrl(
 
   // Agregar transformaciones adicionales
   if (options?.contrast) {
-    transformations.push(`contrast:${options.contrast}`);
+    transformations.push(`e_brightness:${options.contrast}`);
   }
   if (options?.saturation) {
-    transformations.push(`saturation:${options.saturation}`);
+    transformations.push(`e_saturation:${options.saturation}`);
   }
   if (options?.brightness) {
-    transformations.push(`brightness:${options.brightness}`);
-  }
-  if (options?.removeBackground) {
-    transformations.push('background_removal:cloudinary_ai');
+    transformations.push(`e_brightness:${options.brightness}`);
   }
 
   const transformationString = transformations.join('/');
 
-  // Construir URL con extensión y flag de descarga
+  // Construir URL correctamente - sin background removal por ahora
   return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${transformationString}/q_auto,f_jpg,fl_attachment/${publicId}.jpg`;
 }
