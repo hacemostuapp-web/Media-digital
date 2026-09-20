@@ -256,6 +256,17 @@ export const EditorView: React.FC<EditorViewProps> = ({
           </div>
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
             <button
+              onClick={() => handleApplyPreset('Ninguno', 0, 0)}
+              className={`px-3.5 py-2 rounded-full text-[12px] font-semibold flex items-center gap-1.5 shadow-xs whitespace-nowrap transition-transform active:scale-95 cursor-pointer ${
+                activePreset === 'Ninguno' || !activePreset
+                  ? 'bg-[#8e2f4f] text-white'
+                  : 'bg-[#e5e1e2] text-[#1c1b1c] hover:bg-[#f1edee]'
+              }`}
+            >
+              <span className="material-symbols-outlined text-[16px]">close</span>
+              <span>Ninguno</span>
+            </button>
+            <button
               onClick={() => handleApplyPreset('Blanco Puro', 18, 10)}
               className={`px-3.5 py-2 rounded-full text-[12px] font-semibold flex items-center gap-1.5 shadow-xs whitespace-nowrap transition-transform active:scale-95 cursor-pointer ${
                 activePreset === 'Blanco Puro' || activePreset === 'Clean White'
