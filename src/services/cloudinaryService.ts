@@ -82,11 +82,14 @@ export function getResizedUrl(
     if (options.backdropColor === 'white') {
       transformations.push('b_white');
     } else if (options.backdropColor === 'neutral') {
-      transformations.push('b_ebe7e8');
+      // Neutral: #ebe7e8 = rgb(235,231,232)
+      transformations.push('b_rgb:235,231,232');
     } else if (options.backdropColor === 'beige') {
-      transformations.push('b_f4ebd0');
+      // Beige: #f4ebd0 = rgb(244,235,208)
+      transformations.push('b_rgb:244,235,208');
     } else if (options.backdropColor === 'grey') {
-      transformations.push('b_e8ecf2');
+      // Grey: #e8ecf2 = rgb(232,236,242)
+      transformations.push('b_rgb:232,236,242');
     } else if (options.backdropColor === 'transparent') {
       // Para transparente, usar PNG con fondo auto
       transformations.push('b_auto:predominant');
