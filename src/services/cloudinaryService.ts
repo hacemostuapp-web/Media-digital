@@ -79,17 +79,18 @@ export function getResizedUrl(
     transformations.push('e_background_removal');
 
     // Aplicar color de fondo DESPUÉS del background removal
+    // Los colores hex requieren el prefijo "rgb:" en Cloudinary (b_ebe7e8 da 400 Invalid color name)
     if (options.backdropColor === 'white') {
       transformations.push('b_white');
     } else if (options.backdropColor === 'neutral') {
       // Neutral: #ebe7e8
-      transformations.push('b_ebe7e8');
+      transformations.push('b_rgb:ebe7e8');
     } else if (options.backdropColor === 'beige') {
       // Beige: #f4ebd0
-      transformations.push('b_f4ebd0');
+      transformations.push('b_rgb:f4ebd0');
     } else if (options.backdropColor === 'grey') {
       // Grey: #e8ecf2
-      transformations.push('b_e8ecf2');
+      transformations.push('b_rgb:e8ecf2');
     } else if (options.backdropColor === 'transparent') {
       // Para transparente, no agregar background
     }

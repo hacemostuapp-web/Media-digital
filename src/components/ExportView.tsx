@@ -83,6 +83,7 @@ export const ExportView: React.FC<ExportViewProps> = ({
           saturation: photo.saturation,
           brightness: photo.brightness,
           removeBackground: photo.isBgRemoved,
+          backdropColor: photo.selectedBackdrop,
         });
 
         // Link directo a Cloudinary con descarga
