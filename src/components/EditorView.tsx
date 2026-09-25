@@ -297,48 +297,70 @@ export const EditorView: React.FC<EditorViewProps> = ({
               <span>Ninguno</span>
             </button>
             <button
-              onClick={() => handleApplyPreset('Blanco Puro', 18, 10)}
+              onClick={() => handleApplyPreset('Clean White', 5, -5)}
               className={`px-3.5 py-2 rounded-full text-[12px] font-semibold flex items-center gap-1.5 shadow-xs whitespace-nowrap transition-transform active:scale-95 cursor-pointer ${
-                activePreset === 'Blanco Puro' || activePreset === 'Clean White'
+                activePreset === 'Clean White'
                   ? 'bg-[#8e2f4f] text-white'
                   : 'bg-[#e5e1e2] text-[#1c1b1c] hover:bg-[#f1edee]'
               }`}
             >
               <span className="material-symbols-outlined text-[16px]">check_circle</span>
-              <span>Blanco Puro</span>
+              <span>Clean White</span>
             </button>
             <button
-              onClick={() => handleApplyPreset('Cálido Lifestyle', 8, 22)}
+              onClick={() => handleApplyPreset('Brightening', 15, 25)}
               className={`px-3.5 py-2 rounded-full text-[12px] font-semibold flex items-center gap-1.5 shadow-xs whitespace-nowrap transition-transform active:scale-95 cursor-pointer ${
-                activePreset === 'Cálido Lifestyle' || activePreset === 'Warm Lifestyle'
+                activePreset === 'Brightening'
                   ? 'bg-[#8e2f4f] text-white'
                   : 'bg-[#e5e1e2] text-[#1c1b1c] hover:bg-[#f1edee]'
               }`}
             >
               <span className="material-symbols-outlined text-[16px] text-[#701738]">local_cafe</span>
-              <span>Cálido Lifestyle</span>
+              <span>Brightening</span>
             </button>
             <button
-              onClick={() => handleApplyPreset('Gris Minimalista', 14, 0)}
+              onClick={() => handleApplyPreset('Warm Lifestyle', 10, 20)}
               className={`px-3.5 py-2 rounded-full text-[12px] font-semibold flex items-center gap-1.5 shadow-xs whitespace-nowrap transition-transform active:scale-95 cursor-pointer ${
-                activePreset === 'Gris Minimalista' || activePreset === 'Minimal Grey'
+                activePreset === 'Warm Lifestyle'
                   ? 'bg-[#8e2f4f] text-white'
                   : 'bg-[#e5e1e2] text-[#1c1b1c] hover:bg-[#f1edee]'
               }`}
             >
               <span className="material-symbols-outlined text-[16px] text-[#877276]">gradient</span>
-              <span>Gris Minimalista</span>
+              <span>Warm Lifestyle</span>
             </button>
             <button
-              onClick={() => handleApplyPreset('Contraste Urbano', 28, 18)}
+              onClick={() => handleApplyPreset('Bright & Airy', -5, 5)}
               className={`px-3.5 py-2 rounded-full text-[12px] font-semibold flex items-center gap-1.5 shadow-xs whitespace-nowrap transition-transform active:scale-95 cursor-pointer ${
-                activePreset === 'Contraste Urbano' || activePreset === 'Depop Contrast'
+                activePreset === 'Bright & Airy'
                   ? 'bg-[#8e2f4f] text-white'
                   : 'bg-[#e5e1e2] text-[#1c1b1c] hover:bg-[#f1edee]'
               }`}
             >
               <span className="material-symbols-outlined text-[16px] text-[#95435c]">flare</span>
-              <span>Contraste Urbano</span>
+              <span>Bright & Airy</span>
+            </button>
+            <button
+              onClick={() => handleApplyPreset('Pop Colors', 25, 35)}
+              className={`px-3.5 py-2 rounded-full text-[12px] font-semibold flex items-center gap-1.5 shadow-xs whitespace-nowrap transition-transform active:scale-95 cursor-pointer ${
+                activePreset === 'Pop Colors'
+                  ? 'bg-[#8e2f4f] text-white'
+                  : 'bg-[#e5e1e2] text-[#1c1b1c] hover:bg-[#f1edee]'
+              }`}
+            >
+              <span className="material-symbols-outlined text-[16px]">theater_comedy</span>
+              <span>Pop Colors</span>
+            </button>
+            <button
+              onClick={() => handleApplyPreset('Natural True', 8, 10)}
+              className={`px-3.5 py-2 rounded-full text-[12px] font-semibold flex items-center gap-1.5 shadow-xs whitespace-nowrap transition-transform active:scale-95 cursor-pointer ${
+                activePreset === 'Natural True'
+                  ? 'bg-[#8e2f4f] text-white'
+                  : 'bg-[#e5e1e2] text-[#1c1b1c] hover:bg-[#f1edee]'
+              }`}
+            >
+              <span className="material-symbols-outlined text-[16px]">sunny</span>
+              <span>Natural True</span>
             </button>
           </div>
         </div>
