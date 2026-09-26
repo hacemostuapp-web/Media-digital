@@ -24,9 +24,6 @@ export const EditorView: React.FC<EditorViewProps> = ({
   const [contrast, setContrast] = useState(photo.contrast ?? 18);
   const [saturation, setSaturation] = useState(photo.saturation ?? 10);
   const [isBgRemoved, setIsBgRemoved] = useState(photo.isBgRemoved ?? false);
-  const [selectedBackdrop, setSelectedBackdrop] = useState<
-    'white' | 'neutral' | 'beige' | 'grey' | 'transparent'
-  >(photo.selectedBackdrop ?? 'white');
   const [isLightingImproved, setIsLightingImproved] = useState(
     photo.isLightingImproved ?? true
   );
@@ -52,15 +49,6 @@ export const EditorView: React.FC<EditorViewProps> = ({
     setSaturation(sVal);
   };
 
-  // Actualizar color de fondo y guardar en photo
-  const handleBackdropChange = (color: 'white' | 'neutral' | 'beige' | 'grey' | 'transparent') => {
-    setSelectedBackdrop(color);
-    onUpdatePhoto({
-      ...photo,
-      selectedBackdrop: color,
-    });
-  };
-
   // Construir URL de imagen con transformaciones aplicadas
   const getImageUrl = () => {
     // Si estamos en modo comparación, mostrar imagen raw
@@ -68,16 +56,16 @@ export const EditorView: React.FC<EditorViewProps> = ({
       return photo.rawImageUrl || photo.thumbnailUrl;
     }
 
-    // Si tiene background removal, usar getResizedUrl con transformaciones
+    // Si tiene background removal, usar getResizedUrl con PNG transparente (sin color de fondo)
     if (isBgRemoved && photo.id) {
       const publicId = photo.id.replace('photo-', '');
       const url = getResizedUrl(publicId, 'web', {
         contrast: 0,
         saturation: 0,
         removeBackground: true,
-        backdropColor: selectedBackdrop,
+        backdropColor: 'transparent',
       });
-      console.log('Background removal URL:', url, 'Backdrop:', selectedBackdrop);
+      console.log('Background removal URL:', url);
       return url;
     }
 
@@ -91,29 +79,6 @@ export const EditorView: React.FC<EditorViewProps> = ({
     setSaturation(0);
   };
 
-  // Backdrop styling
-  const getBackdropClass = () => {
-    if (!isBgRemoved || selectedBackdrop === 'transparent') {
-      return 'opacity-0';
-    }
-    return 'opacity-95';
-  };
-
-  const getBackdropBackground = () => {
-    switch (selectedBackdrop) {
-      case 'white':
-        return 'linear-gradient(to bottom, #ffffff, #fcf8f9, #f6f3f4)';
-      case 'neutral':
-        return '#ebe7e8';
-      case 'beige':
-        return '#f4ebd0';
-      case 'grey':
-        return '#e8ecf2';
-      default:
-        return 'transparent';
-    }
-  };
-
   // Save current adjustments to photo state and proceed
   const handleApplyAndNext = () => {
     onUpdatePhoto({
@@ -121,7 +86,6 @@ export const EditorView: React.FC<EditorViewProps> = ({
       contrast,
       saturation,
       isBgRemoved,
-      selectedBackdrop,
       isLightingImproved,
       presetApplied: activePreset,
       status: 'edited',
@@ -172,12 +136,6 @@ export const EditorView: React.FC<EditorViewProps> = ({
               backgroundSize: '16px 16px',
               backgroundPosition: '0 0, 0 8px, 8px -8px, -8px 0px',
             }}
-          ></div>
-
-          {/* Studio Lighting Backdrop Overlay */}
-          <div
-            className={`absolute inset-0 transition-all duration-300 pointer-events-none ${getBackdropClass()}`}
-            style={{ background: getBackdropBackground() }}
           ></div>
 
           {/* Optional 3x3 Rule-of-Thirds Grid Overlay */}
@@ -286,17 +244,6 @@ export const EditorView: React.FC<EditorViewProps> = ({
           </div>
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
             <button
-              onClick={() => handleApplyPreset('Ninguno', 0, 0)}
-              className={`px-3.5 py-2 rounded-full text-[12px] font-semibold flex items-center gap-1.5 shadow-xs whitespace-nowrap transition-transform active:scale-95 cursor-pointer ${
-                activePreset === 'Ninguno' || !activePreset
-                  ? 'bg-[#8e2f4f] text-white'
-                  : 'bg-[#e5e1e2] text-[#1c1b1c] hover:bg-[#f1edee]'
-              }`}
-            >
-              <span className="material-symbols-outlined text-[16px]">close</span>
-              <span>Ninguno</span>
-            </button>
-            <button
               onClick={() => handleApplyPreset('Blanco Puro', 5, -5)}
               className={`px-3.5 py-2 rounded-full text-[12px] font-semibold flex items-center gap-1.5 shadow-xs whitespace-nowrap transition-transform active:scale-95 cursor-pointer ${
                 activePreset === 'Blanco Puro'
@@ -404,76 +351,6 @@ export const EditorView: React.FC<EditorViewProps> = ({
                 role="switch"
               >
                 <div className="w-6 h-6 bg-white rounded-full shadow-xs"></div>
-              </button>
-            </div>
-
-            {/* Backdrop Swatches */}
-            <div
-              className={`flex items-center gap-2.5 pt-1 pl-12 transition-opacity ${
-                isBgRemoved ? 'opacity-100' : 'opacity-40 pointer-events-none'
-              }`}
-            >
-              {/* Pure White */}
-              <button
-                onClick={() => handleBackdropChange('white')}
-                className={`w-7 h-7 rounded-full bg-white shadow-xs border flex items-center justify-center cursor-pointer ${
-                  selectedBackdrop === 'white' ? 'border-[#8e2f4f] ring-2 ring-[#8e2f4f]/20' : 'border-[#e5e1e2]'
-                }`}
-                title="Fondo blanco puro"
-              >
-                {selectedBackdrop === 'white' && (
-                  <span className="material-symbols-outlined text-[16px] text-[#8e2f4f]">check</span>
-                )}
-              </button>
-
-              {/* Neutral Studio */}
-              <button
-                onClick={() => handleBackdropChange('neutral')}
-                className={`w-7 h-7 rounded-full bg-[#ebe7e8] shadow-xs border flex items-center justify-center cursor-pointer ${
-                  selectedBackdrop === 'neutral' ? 'border-[#8e2f4f] ring-2 ring-[#8e2f4f]/20' : 'border-transparent'
-                }`}
-                title="Estudio neutro suave"
-              >
-                {selectedBackdrop === 'neutral' && (
-                  <span className="material-symbols-outlined text-[16px] text-[#8e2f4f]">check</span>
-                )}
-              </button>
-
-              {/* Warm Boutique Beige */}
-              <button
-                onClick={() => handleBackdropChange('beige')}
-                className={`w-7 h-7 rounded-full bg-[#f4ebd0] shadow-xs border flex items-center justify-center cursor-pointer ${
-                  selectedBackdrop === 'beige' ? 'border-[#8e2f4f] ring-2 ring-[#8e2f4f]/20' : 'border-transparent'
-                }`}
-                title="Beige cálido de boutique"
-              >
-                {selectedBackdrop === 'beige' && (
-                  <span className="material-symbols-outlined text-[16px] text-[#8e2f4f]">check</span>
-                )}
-              </button>
-
-              {/* Cool Grey */}
-              <button
-                onClick={() => handleBackdropChange('grey')}
-                className={`w-7 h-7 rounded-full bg-[#e8ecf2] shadow-xs border flex items-center justify-center cursor-pointer ${
-                  selectedBackdrop === 'grey' ? 'border-[#8e2f4f] ring-2 ring-[#8e2f4f]/20' : 'border-transparent'
-                }`}
-                title="Piso gris frío"
-              >
-                {selectedBackdrop === 'grey' && (
-                  <span className="material-symbols-outlined text-[16px] text-[#8e2f4f]">check</span>
-                )}
-              </button>
-
-              {/* Transparent PNG */}
-              <button
-                onClick={() => handleBackdropChange('transparent')}
-                className={`w-7 h-7 rounded-full bg-white flex items-center justify-center shadow-xs border cursor-pointer ${
-                  selectedBackdrop === 'transparent' ? 'border-[#8e2f4f] ring-2 ring-[#8e2f4f]/20' : 'border-[#e5e1e2]'
-                }`}
-                title="PNG transparente"
-              >
-                <span className="material-symbols-outlined text-[15px] text-[#554246]">grid_view</span>
               </button>
             </div>
           </div>
