@@ -58,7 +58,6 @@ export function getResizedUrl(
     saturation?: number;
     brightness?: number;
     removeBackground?: boolean;
-    backdropColor?: 'white' | 'neutral' | 'beige' | 'grey' | 'transparent';
   }
 ): string {
   let width = 1200;
@@ -74,26 +73,9 @@ export function getResizedUrl(
 
   const transformations: string[] = [];
 
-  // Background removal con IA PRIMERO (antes de resize)
+  // Background removal con IA PRIMERO (antes de resize) — siempre PNG transparente, sin color de fondo
   if (options?.removeBackground) {
     transformations.push('e_background_removal');
-
-    // Aplicar color de fondo DESPUÉS del background removal
-    // Los colores hex requieren el prefijo "rgb:" en Cloudinary (b_ebe7e8 da 400 Invalid color name)
-    if (options.backdropColor === 'white') {
-      transformations.push('b_white');
-    } else if (options.backdropColor === 'neutral') {
-      // Neutral: #ebe7e8
-      transformations.push('b_rgb:ebe7e8');
-    } else if (options.backdropColor === 'beige') {
-      // Beige: #f4ebd0
-      transformations.push('b_rgb:f4ebd0');
-    } else if (options.backdropColor === 'grey') {
-      // Grey: #e8ecf2
-      transformations.push('b_rgb:e8ecf2');
-    } else if (options.backdropColor === 'transparent') {
-      // Para transparente, no agregar background
-    }
   }
 
   // Resize después del background removal
@@ -113,8 +95,8 @@ export function getResizedUrl(
   const transformationString = transformations.join('/');
 
   // Construir URL correctamente
-  // PNG solo para fondo transparente, JPG para colores
-  const format = options?.removeBackground && options?.backdropColor === 'transparent' ? 'png' : 'jpg';
+  // PNG transparente si se removió el fondo, JPG normal si no
+  const format = options?.removeBackground ? 'png' : 'jpg';
   // Calidad: q_85 balanceo entre compresión y calidad
   return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${transformationString}/q_85,f_${format},fl_attachment/${publicId}.${format}`;
 }

@@ -78,12 +78,12 @@ export const ExportView: React.FC<ExportViewProps> = ({
         }
 
         // Construir URL con transformaciones
+        // Si isBgRemoved=true, getResizedUrl siempre devuelve PNG transparente (sin color de fondo)
         const downloadUrl = getResizedUrl(publicId, size, {
           contrast: photo.contrast,
           saturation: photo.saturation,
           brightness: photo.brightness,
           removeBackground: photo.isBgRemoved,
-          backdropColor: photo.selectedBackdrop,
         });
 
         // Link directo a Cloudinary con descarga

@@ -63,7 +63,6 @@ export const EditorView: React.FC<EditorViewProps> = ({
         contrast: 0,
         saturation: 0,
         removeBackground: true,
-        backdropColor: 'transparent',
       });
       console.log('Background removal URL:', url);
       return url;
